@@ -19,38 +19,6 @@ public class Home_Activity extends AppCompatActivity {
         boolean isLogged = getIntent().getBooleanExtra("isLogged", false);
         // Check if the user is logged in
         if (isLogged) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
-
-            BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-
-            // Set the listener for bottom navigation view
-            bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    Fragment selectedFragment = null;
-
-                    switch (item.getItemId()) {
-                        case R.id.home:
-                            selectedFragment = new HomeFragment();
-                            break;
-                        case R.id.exersise:
-                            selectedFragment = new ExersiseFragment();
-                            break;
-                        case R.id.diet:
-                            selectedFragment = new DietFragment();
-                            break;
-                        case R.id.journal:
-                            selectedFragment = new JournalFragment();
-                            break;
-                        case R.id.profile:
-                            selectedFragment = new ProfileFragment();
-                            break;
-                    }
-
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
-                    return true;
-                }
-            });
             Toast.makeText(this, "Welcome to HomeActivity!", Toast.LENGTH_SHORT).show();
         } else {
             // If the user is not logged in, navigate back to LoginActivity or handle accordingly

@@ -3,6 +3,8 @@ package com.example.exerite_11;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -11,7 +13,14 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_main);
+            Button enter = findViewById(R.id.but_enter);
 
-        startActivity(new Intent(this, Login_activity.class));
+            enter.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(MainActivity.this, Login_activity.class));
+                }
+            });
+
     }
 }
