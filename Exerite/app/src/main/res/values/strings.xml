@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Exerite_1.1</string>
+    <string name="title_home"/>
+    <string name="title_dashboard"/>
+    <string name="title_notifications"/>
+    <string name="title_exercises"/>
+    <string name="diet"/>
+    <string name="title_profile"/>
+    <string name="journal"/>
+    <string name="toolbar_title">Add New Custom Workout</string>
+
+    <string name="search_hint">Search item</string>
+    <string name="editText">Type Something</string>
+
+</resources>

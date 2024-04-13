@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white"
+              android:orientation="vertical">
+
+    <!-- Toolbar with title and add button -->
+
+
+    <!-- Search bar and FloatingActionButton -->
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="8dp">
+
+        <!-- Diet Icon -->
+        <ImageView
+                android:id="@+id/diet_icon"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/diet_icon"
+                android:padding="8dp"/>
+
+        <!-- Search bar -->
+        <EditText
+                android:id="@+id/search_edit_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/search_hint"
+                android:drawablePadding="10dp"
+                android:padding="12dp"
+                android:background="@color/white"
+                android:inputType="text" />
+
+        <!-- Floating Action Button -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/floatingActionButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:clickable="true"
+                android:background="@drawable/rounded_button"
+                app:srcCompat="@android:drawable/ic_input_add" />
+
+    </LinearLayout>
+
+    <!-- RecyclerView for exercise list -->
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_exercises"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="16dp" />
+
+    <!-- Bottom Navigation placeholder -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="?android:attr/windowBackground"
+            app:menu="@menu/bottom_navigation_menu" />
+
+</LinearLayout>
