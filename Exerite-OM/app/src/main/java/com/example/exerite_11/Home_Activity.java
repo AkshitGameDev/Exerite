@@ -27,25 +27,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Home_Activity extends AppCompatActivity {
-    private RecyclerView recyclerView;
-    private TextView nothingToDisplayTextView;
-    private List<String> recentWorkoutsList;
 
-
+TextView name;
 
     // Inflate the layout with data binding
     ActivityHomeBinding binding;
-
-
     private String userEmail;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+
 
         userEmail = getIntent().getStringExtra("USER_EMAIL");
         replaceFragment(new HomeFragment());
@@ -77,10 +72,18 @@ public class Home_Activity extends AppCompatActivity {
             }
             return true;
         });
+
+
+
+
     }
 
 
-    private void  replaceFragment(Fragment fragment){
+
+    public void getfragment(Fragment fragment) {
+        replaceFragment(fragment);
+    }
+     private void  replaceFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout, fragment);
@@ -91,14 +94,19 @@ public class Home_Activity extends AppCompatActivity {
 
     public void image_exersise(View view){
         Toast.makeText(this, "Rediericting to exersise screen ", Toast.LENGTH_SHORT).show();
+        replaceFragment(new ExerciseFragment());
     }
     public void image_diet(View view){
         Toast.makeText(this, "Rediericting to diet screen ", Toast.LENGTH_SHORT).show();
-
     }
     public void image_journal(View view){
         Toast.makeText(this, "Rediericting to journlal screen ", Toast.LENGTH_SHORT).show();
     }
+    public void image_strength(View view) {
 
+    }
 
+    public void image_cardio(View view) {
+
+    }
 }

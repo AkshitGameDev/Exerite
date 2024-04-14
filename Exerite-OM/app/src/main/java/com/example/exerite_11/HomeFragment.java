@@ -3,6 +3,8 @@ package com.example.exerite_11;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,10 +77,10 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         name =  rootView.findViewById(R.id.NameDisplayField);
-
         name.setText(TrimIfNeeded());
-
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
+
+
 
 }

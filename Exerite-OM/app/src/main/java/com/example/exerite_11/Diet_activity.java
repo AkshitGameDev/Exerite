@@ -20,20 +20,5 @@ public class Diet_activity extends AppCompatActivity {
 
     }
 
-    public void image_non_veg(View view) {
-        // Handle click on non-veg image here
-        Intent intent = new Intent(this, NonVeg_Activity.class);
-        startActivity(intent);
     }
-    public void image_veg(View view) {
-        // Handle click on non-veg image here
-        Intent intent = new Intent(this, NonVeg_Activity.class);
-        startActivity(intent);
-    }
-    public void image_drinks(View view) {
-        // Handle click on non-veg image here
-        Intent intent = new Intent(this, NonVeg_Activity.class);
-        startActivity(intent);
-    }
-}
 

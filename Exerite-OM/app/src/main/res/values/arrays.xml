@@ -1,9 +1,282 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="exercise_list">
-        <item>Exercise 1</item>
-        <item>Exercise 2</item>
-        <item>Exercise 3</item>
-        <!-- Add more items as needed -->
+    <string-array name="strength_exercise_names">
+        <item>Push-ups</item>
+        <item>Squats</item>
+        <item>Plank</item>
+        <item>Lunges</item>
+        <item>Deadlifts</item>
+        <item>Pull-ups</item>
+        <item>Bench Press</item>
+        <item>Bicep Curls</item>
+        <item>Tricep Dips</item>
+        <item>Leg Press</item>
+        <item>Crunches</item>
+        <item>Dumbbell Rows</item>
+        <item>Shoulder Press</item>
+        <item>Calf Raises</item>
+        <item>Hamstring Curls</item>
+        <item>Side Plank</item>
+        <item>Box Jumps</item>
+        <item>Renegade Rows</item>
+        <item>Russian Twists</item>
+        <item>Leg Raises</item>
+        <item>Mountain Climbers</item>
+        <item>Jump Squats</item>
+        <item>Hammer Curls</item>
+        <item>Skull Crushers</item>
+        <item>Wall Sits</item>
+        <item>Single-leg Deadlifts</item>
+        <item>Reverse Lunges</item>
+        <item>Decline Push-ups</item>
+        <item>Step-ups</item>
+        <item>Chest Flyes</item>
+        <item>Incline Bench Press</item>
+        <item>Standing Calf Raises</item>
+        <item>Dumbbell Pullovers</item>
+        <item>Seated Rows</item>
+        <item>Leg Extensions</item>
+        <item>Standing Military Press</item>
+        <item>Front Squats</item>
+        <item>Overhead Tricep Extensions</item>
+        <item>Plank Jacks</item>
+        <item>Lateral Raises</item>
+        <item>Barbell Shrugs</item>
+        <item>Flutter Kicks</item>
+        <item>Hanging Leg Raises</item>
+        <item>Walking Lunges</item>
+        <item>Pistol Squats</item>
+        <item>Reverse Crunches</item>
+        <item>Glute Bridges</item>
+        <item>Side Lunges</item>
+        <item>High Knees</item>
+        <item>Close-grip Bench Press</item>
+        <item>Sumo Squats</item>
+        <item>Cable Rows</item>
+        <item>Leg Raises on Roman Chair</item>
+        <item>Trap Bar Deadlifts</item>
+        <item>Reverse Flyes</item>
+        <item>Barbell Lunges</item>
+        <item>Hammer Strength Machine Rows</item>
+        <item>Kettlebell Swings</item>
+        <item>Leg Curl Machine</item>
+        <item>Rope Tricep Pushdowns</item>
+        <item>Standing Dumbbell Press</item>
+        <item>Close-grip Pull-downs</item>
+        <item>Standing Calf Raises with Dumbbells</item>
+        <item>Front Plate Raises</item>
+        <item>Single-arm Dumbbell Rows</item>
+        <item>Machine Bench Press</item>
+        <item>Machine Leg Press</item>
+        <item>Smith Machine Squats</item>
+        <item>Cable Bicep Curls</item>
+        <item>Tricep Cable Pushdowns</item>
+    </string-array>
+
+    <string-array name="strength_exercise_reps">
+        <item>17</item>
+        <item>12</item>
+        <item>20</item>
+        <item>15</item>
+        <item>10</item>
+        <item>23</item>
+        <item>18</item>
+        <item>13</item>
+        <item>22</item>
+        <item>9</item>
+        <item>14</item>
+        <item>21</item>
+        <item>11</item>
+        <item>16</item>
+        <item>19</item>
+        <item>24</item>
+        <item>25</item>
+        <item>8</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>8</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>8</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+    </string-array>
+
+    <string-array name="cardio_exercise_names">
+        <item>Running</item>
+        <item>Cycling</item>
+        <item>Jump Rope</item>
+        <item>Swimming</item>
+        <item>Rowing</item>
+        <item>High Knees</item>
+        <item>Jumping Jacks</item>
+        <item>Mountain Climbers</item>
+        <item>Burpees</item>
+        <item>Sprinting</item>
+        <item>Elliptical Training</item>
+        <item>Stair Climbing</item>
+        <item>Boxing</item>
+        <item>Kickboxing</item>
+        <item>Agility Ladder Drills</item>
+        <item>Hiking</item>
+        <item>Dancing</item>
+        <item>Inline Skating</item>
+        <item>Cardio Kick</item>
+        <item>Rowing Machine</item>
+        <item>Shadow Boxing</item>
+        <item>Skating</item>
+        <item>Hula Hooping</item>
+        <item>Jogging</item>
+        <item>Treadmill</item>
+        <item>Step Aerobics</item>
+        <item>Cardio Circuit</item>
+        <item>Skipping</item>
+        <item>Stationary Bike</item>
+        <item>Brisk Walking</item>
+        <item>Zumba</item>
+        <item>Pilates</item>
+        <item>Power Yoga</item>
+        <item>Body Combat</item>
+        <item>Interval Training</item>
+        <item>Beach Running</item>
+        <item>Trail Running</item>
+        <item>Sandbag Workout</item>
+        <item>Surfing</item>
+        <item>Jump Squats</item>
+        <item>Jump Lunges</item>
+        <item>Box Jumps</item>
+        <item>Tabata Training</item>
+        <item>Spinning</item>
+        <item>Kayaking</item>
+        <item>Canoeing</item>
+        <item>Jumping Rope</item>
+        <item>Rock Climbing</item>
+        <item>Kettlebell Swings</item>
+        <item>Battle Ropes</item>
+        <item>Boxing Drills</item>
+        <item>Jumping Oblique Twists</item>
+        <item>Burpee Tuck Jumps</item>
+        <item>Speed Skaters</item>
+        <item>Butt Kicks</item>
+        <item>High Intensity Interval Training (HIIT)</item>
+        <item>Running Up Stairs</item>
+        <item>Running Down Stairs</item>
+        <item>Biking Up Hills</item>
+        <item>Biking Down Hills</item>
+    </string-array>
+
+    <string-array name="cardio_exercise_times">
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
     </string-array>
 </resources>
