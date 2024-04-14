@@ -11,15 +11,16 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:background="@drawable/but_4" >
 
             <TextView
-                android:id="@+id/exe_title"
+                android:id="@+id/car_title"
                 android:layout_width="295dp"
                 android:layout_height="36dp"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif"
                 android:text="@string/cardio"
@@ -29,17 +30,17 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/exe_duration"
+                android:id="@+id/car_duration"
                 android:layout_width="160dp"
                 android:layout_height="21dp"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="32dp"
                 android:fontFamily="sans-serif"
                 android:text="@string/time"
                 android:textColor="#6f747c"
                 android:textSize="16sp"
 
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/exe_title" />
+                app:layout_constraintTop_toBottomOf="@+id/car_title" />
 
             <ImageView
                 android:id="@+id/imageView"

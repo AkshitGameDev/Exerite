@@ -27,10 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Home_Activity extends AppCompatActivity {
-
-TextView name;
-
-    // Inflate the layout with data binding
+    TextView name;
     ActivityHomeBinding binding;
     private String userEmail;
 
@@ -73,12 +70,7 @@ TextView name;
             return true;
         });
 
-
-
-
     }
-
-
 
     public void getfragment(Fragment fragment) {
         replaceFragment(fragment);
@@ -103,10 +95,12 @@ TextView name;
         Toast.makeText(this, "Rediericting to journlal screen ", Toast.LENGTH_SHORT).show();
     }
     public void image_strength(View view) {
-
+        Intent intent = new Intent(this, SterngthActivity.class);
+        startActivity(intent);
     }
-
     public void image_cardio(View view) {
-
+        Intent intent = new Intent(this, CardioActivity.class);
+        startActivity(intent);
     }
+
 }

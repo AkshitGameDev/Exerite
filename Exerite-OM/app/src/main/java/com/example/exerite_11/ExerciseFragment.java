@@ -3,10 +3,14 @@ package com.example.exerite_11;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +27,10 @@ public class ExerciseFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+     RecyclerView recyclerView;
+     ExersiseRvAdapter adapter;
+     ArrayList<ExersiseModel> fragModel;
 
     public ExerciseFragment() {
         // Required empty public constructor
@@ -45,7 +53,6 @@ public class ExerciseFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,12 +60,28 @@ public class ExerciseFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        fragModel = new ArrayList<>();
+        String[] exerciseNames = getResources().getStringArray(R.array.strength_exercise_names);
+        String[] exerciseReps = getResources().getStringArray(R.array.strength_exercise_reps);
+        for (int i = 0; i < exerciseNames.length; i++) {
+            fragModel.add(new ExersiseModel(exerciseNames[i], exerciseReps[i]));
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_exercise, container, false);
+
+        View rootView = inflater.inflate(R.layout.fragment_exercise, container, false);
+
+        recyclerView = rootView.findViewById(R.id.recycler_view_exercises);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        adapter = new ExersiseRvAdapter(getContext(), fragModel);
+        recyclerView.setAdapter(adapter);
+
+
+        return rootView;
     }
 }
