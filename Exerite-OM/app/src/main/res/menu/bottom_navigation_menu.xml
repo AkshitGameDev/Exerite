@@ -14,7 +14,7 @@
             android:icon="@drawable/diet_icon"
             android:title="@string/diet" />
     <item
-            android:id="@+id/navigation_progress"
+            android:id="@+id/navigation_journal"
             android:icon="@drawable/journal_icon"
             android:title="@string/journal" />
     <item

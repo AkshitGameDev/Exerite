@@ -21,7 +21,8 @@
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:layout_marginTop="16dp"
-                android:onClick="image_non_veg"/>
+                android:onClick="image_non_veg"
+         />
 
         <!-- Veg Button -->
         <ImageView
@@ -32,7 +33,7 @@
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:layout_marginTop="16dp"
-        android:onClick="image_veg"/>
+        />
 
 
         <!-- Drinks Button -->
@@ -49,12 +50,5 @@
     </LinearLayout>
 
     <!-- BottomNavigationView for displaying the menu -->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_navigation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="?android:attr/windowBackground"
-            app:menu="@menu/bottom_navigation_menu" />
 
 </RelativeLayout>

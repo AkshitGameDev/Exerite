@@ -18,6 +18,8 @@ public class Login_activity extends AppCompatActivity {
     private Button buttonLogin;
     private Button signUpButton;
 
+    public static String name = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +50,7 @@ public class Login_activity extends AppCompatActivity {
         DB = new DBHelper(this);
 
         String username = userEmail.getText().toString().trim();
+        name = userEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
         if (username.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Please fill required information", Toast.LENGTH_SHORT).show();

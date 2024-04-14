@@ -1,0 +1,114 @@
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Home_Activity">
+
+
+        <FrameLayout
+            android:id="@+id/frame_layout"
+            android:layout_width="match_parent"
+            android:layout_height="652dp"
+            android:layout_above="@+id/bottom_navigation"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="-1dp">
+
+
+        </FrameLayout>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="?android:attr/windowBackground"
+            app:itemBackground="@drawable/asset_19"
+            app:menu="@menu/bottom_navigation_menu"
+            />
+
+    </RelativeLayout>
+
+</layout>
+
+<!--<ImageView-->
+<!--android:id="@+id/imageView13"-->
+<!--android:layout_width="100dp"-->
+<!--android:layout_height="100dp"-->
+<!--android:layout_alignParentStart="true"-->
+<!--android:layout_alignParentTop="true"-->
+<!--android:layout_marginStart="23dp"-->
+<!--android:layout_marginTop="13dp"-->
+<!--app:srcCompat="@drawable/asset_23" />-->
+
+<!--<TextView-->
+<!--android:id="@+id/NameDisplayField"-->
+<!--android:layout_width="261dp"-->
+<!--android:layout_height="55dp"-->
+<!--android:layout_alignParentTop="true"-->
+<!--android:layout_alignParentEnd="true"-->
+<!--android:layout_centerHorizontal="true"-->
+<!--android:layout_marginStart="0dp"-->
+<!--android:layout_marginTop="27dp"-->
+<!--android:layout_marginEnd="27dp"-->
+<!--android:layout_toEndOf="@+id/imageView13"-->
+<!--android:fontFamily="sans-serif"-->
+<!--android:text="Hey, Name"-->
+<!--android:textSize="32sp" />-->
+
+<!--<TextView-->
+<!--android:id="@+id/textView2"-->
+<!--android:layout_width="258dp"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:layout_below="@+id/NameDisplayField"-->
+<!--android:layout_alignParentEnd="true"-->
+<!--android:layout_marginStart="1dp"-->
+<!--android:layout_marginTop="7dp"-->
+<!--android:layout_marginEnd="29dp"-->
+<!--android:layout_toEndOf="@+id/imageView13"-->
+<!--android:text="@string/tagline"-->
+<!--android:textSize="16sp" />-->
+
+<!--<ImageView-->
+<!--android:id="@+id/diet_home"-->
+<!--android:layout_width="300dp"-->
+<!--android:layout_height="150dp"-->
+<!--android:layout_below="@+id/exersise_home"-->
+<!--android:layout_alignParentEnd="false"-->
+<!--android:layout_centerHorizontal="true"-->
+<!--android:layout_marginTop="-1dp"-->
+<!--android:layout_marginEnd="-6dp"-->
+<!--app:srcCompat="@drawable/diet"-->
+<!--android:contentDescription="@string/todo"-->
+<!--android:onClick="image_diet"/>-->
+
+<!--<ImageView-->
+<!--android:id="@+id/journal_home"-->
+<!--android:layout_width="300dp"-->
+<!--android:layout_height="150dp"-->
+<!--android:layout_below="@+id/diet_home"-->
+<!--android:layout_alignParentStart="false"-->
+<!--android:layout_centerHorizontal="true"-->
+<!--android:layout_marginTop="2dp"-->
+<!--android:contentDescription="@string/todo"-->
+<!--android:onClick="image_journal"-->
+<!--app:srcCompat="@drawable/asset_6" />-->
+
+<!--<ImageView-->
+<!--android:id="@+id/exersise_home"-->
+<!--android:layout_width="300dp"-->
+<!--android:layout_height="150dp"-->
+<!--android:layout_below="@+id/imageView13"-->
+<!--android:layout_alignParentEnd="true"-->
+<!--android:layout_centerHorizontal="true"-->
+<!--android:layout_marginTop="37dp"-->
+<!--android:layout_marginEnd="51dp"-->
+<!--android:contentDescription="@string/todo"-->
+<!--app:srcCompat="@drawable/exersise"-->
+<!--android:onClick="image_exersise"/>-->
+
