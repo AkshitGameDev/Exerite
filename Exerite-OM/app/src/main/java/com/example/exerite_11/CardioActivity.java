@@ -28,14 +28,11 @@ public class CardioActivity extends AppCompatActivity {
             public boolean onQueryTextSubmit(String query) {
                 return false;
             }
-
             @Override
             public boolean onQueryTextChange(String newText) {
                 fileList(newText);
                 return true;
             }
-
-
         });
 
         recyclerView = findViewById(R.id.cardioRV);

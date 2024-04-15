@@ -21,5 +21,19 @@
     <string name="cardio">Cardio</string>
     <string name="time">Time</string>
     <string name="searching_for_exersises">searching for ExErsises??</string>
+    <string name="pick_a_diet">PICK A DIET</string>
+    <string name="calories">calories</string>
+    <string name="dish_name">Dish Name</string>
+    <string name="try_exerite">Try EXErite</string>
+    <string name="hey">Hey, !</string>
+    <string name="diet_streak_3_10">Diet Streak 3/10</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="log_out">Log Out</string>
+    <string name="exercise_streak_8_10">Exercise Streak 8/10</string>
+    <string name="new_name">New Name</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="recents">Recents</string>
+    <string name="journal12">Journal</string>
+    <string name="search">Search</string>
 
 </resources>

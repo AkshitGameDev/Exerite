@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SterngthActivity">
-
+    tools:context=".VegActivity">
     <androidx.appcompat.widget.SearchView
-        android:id="@+id/strenghtSearch"
+        android:id="@+id/VegS"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:background="@drawable/searchview"
@@ -17,21 +16,18 @@
         app:layout_constraintHorizontal_bias="0.144"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.015"
-        android:fitsSystemWindows="true"
+        app:layout_constraintVertical_bias="0.023"
         app:queryHint="@string/search_hint" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/strenghtRv"
+        android:id="@+id/VegRV"
         android:layout_width="match_parent"
         android:layout_height="666dp"
-        android:layout_marginTop="9dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        android:fitsSystemWindows="true"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.988" />
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

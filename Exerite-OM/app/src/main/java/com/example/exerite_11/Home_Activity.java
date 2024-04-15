@@ -30,13 +30,11 @@ public class Home_Activity extends AppCompatActivity {
     TextView name;
     ActivityHomeBinding binding;
     private String userEmail;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
 
 
         userEmail = getIntent().getStringExtra("USER_EMAIL");
@@ -55,22 +53,23 @@ public class Home_Activity extends AppCompatActivity {
             else if(item.getItemId() == R.id.navigation_nutrition){
 
                 Toast.makeText(this, "Rediericting to diet screen ", Toast.LENGTH_SHORT).show();
-                replaceFragment(new HomeFragment());
+                replaceFragment(new diet_fragment());
             }
             else if(item.getItemId() == R.id.navigation_journal){
 
                 Toast.makeText(this, "Rediericting to journal screen ", Toast.LENGTH_SHORT).show();
-                replaceFragment(new HomeFragment());
+                replaceFragment(new JournalFragment());
             }
             else if(item.getItemId() == R.id.navigation_profile){
 
                 Toast.makeText(this, "Rediericting to profile screen ", Toast.LENGTH_SHORT).show();
-                replaceFragment(new HomeFragment());
+                replaceFragment(new SettingsActiity());
             }
             return true;
         });
 
     }
+
 
     public void getfragment(Fragment fragment) {
         replaceFragment(fragment);
@@ -90,6 +89,7 @@ public class Home_Activity extends AppCompatActivity {
     }
     public void image_diet(View view){
         Toast.makeText(this, "Rediericting to diet screen ", Toast.LENGTH_SHORT).show();
+        replaceFragment(new diet_fragment());
     }
     public void image_journal(View view){
         Toast.makeText(this, "Rediericting to journlal screen ", Toast.LENGTH_SHORT).show();
@@ -100,6 +100,18 @@ public class Home_Activity extends AppCompatActivity {
     }
     public void image_cardio(View view) {
         Intent intent = new Intent(this, CardioActivity.class);
+        startActivity(intent);
+    }
+    public void image_nonVeg(View view) {
+        Intent intent = new Intent(this, NonVegActivity.class);
+        startActivity(intent);
+    }
+    public void image_Veg(View view) {
+        Intent intent = new Intent(this, VegActivity.class);
+        startActivity(intent);
+    }
+    public void image_drinks(View view) {
+        Intent intent = new Intent(Home_Activity.this, DrinksActivity.class);
         startActivity(intent);
     }
 

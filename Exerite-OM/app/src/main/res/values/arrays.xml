@@ -279,4 +279,303 @@
         <item>11</item>
         <item>12</item>
     </string-array>
+
+    <!-- Non-Vegetarian Food Names -->
+    <string-array name="non_veg_food_names">
+        <item>Grilled Chicken Breast</item>
+        <item>Salmon Fillet</item>
+        <item>Turkey Breast</item>
+        <item>Tuna Steak</item>
+        <item>Lean Beef</item>
+        <item>Shrimp</item>
+        <item>Cod Fillet</item>
+        <item>Lamb Chops</item>
+        <item>Veal</item>
+        <item>Pork Tenderloin</item>
+        <item>Duck Breast</item>
+        <item>Rabbit Meat</item>
+        <item>Quail</item>
+        <item>Ostrich</item>
+        <item>Goose</item>
+        <item>Kangaroo</item>
+        <item>Buffalo Meat</item>
+        <item>Bison Meat</item>
+        <item>Octopus</item>
+        <item>Squid</item>
+        <item>Scallops</item>
+        <item>Lobster</item>
+        <item>Crab</item>
+        <item>Mussels</item>
+        <item>Clams</item>
+        <item>Eel</item>
+        <item>Escargot (Snails)</item>
+        <item>Frog Legs</item>
+        <item>Herring</item>
+        <item>Sardines</item>
+        <item>Anchovies</item>
+        <item>Mackerel</item>
+        <item>Trout</item>
+        <item>Cod Liver</item>
+        <item>Swordfish</item>
+        <item>Halibut</item>
+        <item>Monkfish</item>
+        <item>Catfish</item>
+        <item>Bluefish</item>
+        <item>Striped Bass</item>
+        <item>Grouper</item>
+        <item>Perch</item>
+        <item>Walleye</item>
+        <item>Pike</item>
+        <item>Barramundi</item>
+        <item>Yellowtail</item>
+        <item>Red Snapper</item>
+        <item>Mahi Mahi</item>
+        <item>Sea Bass</item>
+        <item>Rockfish</item>
+        <item>Tilefish</item>
+        <item>Kingfish</item>
+        <item>Wahoo</item>
+    </string-array>
+
+    <!-- Non-Vegetarian Food Calories -->
+    <string-array name="non_veg_food_calories">
+        <item>165 calories</item> <!-- Grilled Chicken Breast -->
+        <item>206 calories</item> <!-- Salmon Fillet -->
+        <item>135 calories</item> <!-- Turkey Breast -->
+        <item>132 calories</item> <!-- Tuna Steak -->
+        <item>154 calories</item> <!-- Lean Beef -->
+        <item>84 calories</item>  <!-- Shrimp -->
+        <item>82 calories</item>  <!-- Cod Fillet -->
+        <item>250 calories</item> <!-- Lamb Chops -->
+        <item>105 calories</item> <!-- Veal -->
+        <item>143 calories</item> <!-- Pork Tenderloin -->
+        <item>161 calories</item> <!-- Duck Breast -->
+        <item>173 calories</item> <!-- Rabbit Meat -->
+        <item>121 calories</item> <!-- Quail -->
+        <item>142 calories</item> <!-- Ostrich -->
+        <item>136 calories</item> <!-- Goose -->
+        <item>104 calories</item> <!-- Kangaroo -->
+        <item>109 calories</item> <!-- Buffalo Meat -->
+        <item>143 calories</item> <!-- Bison Meat -->
+        <item>82 calories</item>  <!-- Octopus -->
+        <item>79 calories</item>  <!-- Squid -->
+        <item>95 calories</item>  <!-- Scallops -->
+        <item>89 calories</item>  <!-- Lobster -->
+        <item>83 calories</item>  <!-- Crab -->
+        <item>73 calories</item>  <!-- Mussels -->
+        <item>148 calories</item> <!-- Clams -->
+        <item>184 calories</item> <!-- Eel -->
+        <item>90 calories</item>  <!-- Escargot (Snails) -->
+        <item>61 calories</item>  <!-- Frog Legs -->
+        <item>158 calories</item> <!-- Herring -->
+        <item>208 calories</item> <!-- Sardines -->
+        <item>149 calories</item> <!-- Anchovies -->
+        <item>305 calories</item> <!-- Mackerel -->
+        <item>168 calories</item> <!-- Trout -->
+        <item>333 calories</item> <!-- Cod Liver -->
+        <item>180 calories</item> <!-- Swordfish -->
+        <item>115 calories</item> <!-- Halibut -->
+        <item>96 calories</item>  <!-- Monkfish -->
+        <item>105 calories</item> <!-- Catfish -->
+        <item>142 calories</item> <!-- Bluefish -->
+        <item>124 calories</item> <!-- Striped Bass -->
+        <item>96 calories</item>  <!-- Grouper -->
+        <item>96 calories</item>  <!-- Perch -->
+        <item>69 calories</item>  <!-- Walleye -->
+        <item>82 calories</item>  <!-- Pike -->
+        <item>113 calories</item> <!-- Barramundi -->
+        <item>109 calories</item> <!-- Yellowtail -->
+        <item>112 calories</item> <!-- Red Snapper -->
+        <item>134 calories</item> <!-- Mahi Mahi -->
+        <item>133 calories</item> <!-- Sea Bass -->
+        <item>115 calories</item> <!-- Rockfish -->
+        <item>109 calories</item> <!-- Tilefish -->
+        <item>129 calories</item> <!-- Kingfish -->
+        <item>121 calories</item> <!-- Wahoo -->
+    </string-array>
+
+    <!-- Vegetarian Food Names -->
+    <string-array name="veg_food_names">
+        <item>Broccoli</item>
+        <item>Spinach</item>
+        <item>Kale</item>
+        <item>Cauliflower</item>
+        <item>Cabbage</item>
+        <item>Brussels Sprouts</item>
+        <item>Asparagus</item>
+        <item>Green Beans</item>
+        <item>Bell Peppers</item>
+        <item>Carrots</item>
+        <item>Zucchini</item>
+        <item>Cucumber</item>
+        <item>Celery</item>
+        <item>Lettuce</item>
+        <item>Tomato</item>
+        <item>Onion</item>
+        <item>Garlic</item>
+        <item>Ginger</item>
+        <item>Radish</item>
+        <item>Beets</item>
+        <item>Turnips</item>
+        <item>Potatoes</item>
+        <item>Sweet Potatoes</item>
+        <item>Pumpkin</item>
+        <item>Butternut Squash</item>
+        <item>Acorn Squash</item>
+        <item>Spaghetti Squash</item>
+        <item>Eggplant</item>
+        <item>Artichoke</item>
+        <item>Okra</item>
+        <item>Green Peas</item>
+        <item>Corn</item>
+        <item>Mushrooms</item>
+        <item>Avocado</item>
+        <item>Broccoli Rabe</item>
+        <item>Chard</item>
+        <item>Collard Greens</item>
+        <item>Watercress</item>
+        <item>Arugula</item>
+        <item>Endive</item>
+        <item>Kohlrabi</item>
+        <item>Romaine Lettuce</item>
+        <item>Iceberg Lettuce</item>
+        <item>Red Leaf Lettuce</item>
+        <item>Green Leaf Lettuce</item>
+        <item>Bok Choy</item>
+        <item>Chinese Cabbage</item>
+        <item>Swiss Chard</item>
+        <item>Mustard Greens</item>
+        <item>Sugar Snap Peas</item>
+        <item>Green Onions</item>
+        <item>Leeks</item>
+        <item>Scallions</item>
+        <item>Shallots</item>
+        <item>Chives</item>
+    </string-array>
+
+    <!-- Vegetarian Food Calories -->
+    <string-array name="veg_food_calories">
+        <item>55 calories</item>  <!-- Broccoli -->
+        <item>23 calories</item>  <!-- Spinach -->
+        <item>49 calories</item>  <!-- Kale -->
+        <item>25 calories</item>  <!-- Cauliflower -->
+        <item>22 calories</item>  <!-- Cabbage -->
+        <item>43 calories</item>  <!-- Brussels Sprouts -->
+        <item>20 calories</item>  <!-- Asparagus -->
+        <item>31 calories</item>  <!-- Green Beans -->
+        <item>31 calories</item>  <!-- Bell Peppers -->
+        <item>41 calories</item>  <!-- Carrots -->
+        <item>17 calories</item>  <!-- Zucchini -->
+        <item>16 calories</item>  <!-- Cucumber -->
+        <item>16 calories</item>  <!-- Celery -->
+        <item>15 calories</item>  <!-- Lettuce -->
+        <item>18 calories</item>  <!-- Tomato -->
+        <item>40 calories</item>  <!-- Onion -->
+        <item>149 calories</item> <!-- Garlic -->
+        <item>80 calories</item>  <!-- Ginger -->
+        <item>16 calories</item>  <!-- Radish -->
+        <item>43 calories</item>  <!-- Beets -->
+        <item>28 calories</item>  <!-- Turnips -->
+        <item>77 calories</item>  <!-- Potatoes -->
+        <item>86 calories</item>  <!-- Sweet Potatoes -->
+        <item>26 calories</item>  <!-- Pumpkin -->
+        <item>40 calories</item>  <!-- Butternut Squash -->
+        <item>40 calories</item>  <!-- Acorn Squash -->
+        <item>31 calories</item>  <!-- Spaghetti Squash -->
+        <item>25 calories</item>  <!-- Eggplant -->
+        <item>47 calories</item>  <!-- Artichoke -->
+        <item>33 calories</item>  <!-- Okra -->
+        <item>80 calories</item>  <!-- Green Peas -->
+        <item>86 calories</item>  <!-- Corn -->
+        <item>15 calories</item>  <!-- Mushrooms -->
+        <item>160 calories</item> <!-- Avocado -->
+        <item>22 calories</item>  <!-- Broccoli Rabe -->
+        <item>35 calories</item>  <!-- Chard -->
+        <item>32 calories</item>  <!-- Collard Greens -->
+        <item>11 calories</item>  <!-- Watercress -->
+        <item>25 calories</item>  <!-- Arugula -->
+        <item>17 calories</item>  <!-- Endive -->
+        <item>27 calories</item>  <!-- Kohlrabi -->
+        <item>15 calories</item>  <!-- Romaine Lettuce -->
+        <item>14 calories</item>  <!-- Iceberg Lettuce -->
+        <item>15 calories</item>  <!-- Red Leaf Lettuce -->
+        <item>15 calories</item>  <!-- Green Leaf Lettuce -->
+        <item>13 calories</item>  <!-- Bok Choy -->
+        <item>12 calories</item>  <!-- Chinese Cabbage -->
+        <item>35 calories</item>  <!-- Swiss Chard -->
+        <item>27 calories</item>  <!-- Mustard Greens -->
+        <item>42 calories</item>  <!-- Sugar Snap Peas -->
+        <item>32 calories</item>  <!-- Green Onions -->
+        <item>61 calories</item>  <!-- Leeks -->
+        <item>31 calories</item>  <!-- Scallions -->
+        <item>72 calories</item>  <!-- Shallots -->
+        <item>30 calories</item>  <!-- Chives -->
+    </string-array>
+
+    <string-array name="diet_drink_names">
+        <item>Water</item>
+        <item>Green Tea</item>
+        <item>Black Coffee</item>
+        <item>Herbal Tea</item>
+        <item>Sparkling Water</item>
+        <item>Flavored Water Zero Calorie</item>
+        <item>Club Soda</item>
+        <item>Zero-Calorie Sports Drinks</item>
+        <item>Zero-Calorie Energy Drinks</item>
+        <item>Diet Soda Cola</item>
+        <item>Diet Soda Lemon-Lime</item>
+        <item>Diet Soda Orange</item>
+        <item>Diet Soda Root Beer</item>
+        <item>Diet Soda Ginger Ale</item>
+        <item>Diet Soda Grape</item>
+        <item>Diet Soda Cherry</item>
+        <item>Diet Soda Vanilla</item>
+        <item>Diet Soda Dr. Pepper</item>
+        <item>Diet Tonic Water</item>
+        <item>Diet Ginger Beer</item>
+        <item>Diet Cranberry Juice</item>
+        <item>Diet Orange Juice</item>
+        <item>Diet Grapefruit Juice</item>
+        <item>Diet Apple Juice</item>
+        <item>Diet Lemonade</item>
+        <item>Diet Iced Tea Lemon</item>
+        <item>Diet Iced Tea Peach</item>
+        <item>Diet Iced Tea Raspberry</item>
+        <item>Diet Iced Tea Unsweetened</item>
+        <!-- Add more items here -->
+    </string-array>
+
+    <string-array name="diet_drink_calories">
+        <item>0 calories</item>
+        <item>0 calories</item>
+        <item>1 calorie</item>
+        <item>0 calories</item>
+        <item>0 calories</item>
+        <item>0 calories</item>
+        <item>0 calories</item>
+        <item>0 calories</item>
+        <item>0 calories</item>
+        <item>0 calories</item>
+        <item>0 calories</item>
+        <item>0 calories</item>
+        <item>0 calories</item>
+        <item>0 calories</item>
+        <item>0 calories</item>
+        <item>0 calories</item>
+        <item>0 calories</item>
+        <item>0 calories</item>
+        <item>0 calories</item>
+        <item>0 calories</item>
+        <item>10 calories</item>
+        <item>0 calories</item>
+        <item>5 calories</item>
+        <item>5 calories</item>
+        <item>5 calories</item>
+        <item>0 calories</item>
+        <item>0 calories</item>
+        <item>0 calories</item>
+        <item>0 calories</item>
+    </string-array>
+
+
 </resources>
