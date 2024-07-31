@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class GenericDietRVAdapter extends RecyclerView.Adapter<GenericDietRVAdapter.MyViewHolder> {
     ArrayList<DietModel> dietModels;
@@ -51,8 +50,8 @@ public class GenericDietRVAdapter extends RecyclerView.Adapter<GenericDietRVAdap
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            Name = itemView.findViewById(R.id.diet);
-            Cal = itemView.findViewById(R.id.calories);
+            Name = itemView.findViewById(R.id.journal_title_tv);
+            Cal = itemView.findViewById(R.id.journaldesc_tv);
 
         }
     }

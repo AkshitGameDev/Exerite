@@ -66,7 +66,7 @@ public class SettingsActiity extends Fragment {
 
     public String TrimIfNeeded(){
         String temp = Login_activity.name;
-        if(temp.length() >= 5){
+        if(temp.length() >= 7){
             temp = "Hey, " + temp.substring(0, 4) + "..." + "!";
             return temp;
         }

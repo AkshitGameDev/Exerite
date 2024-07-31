@@ -2,81 +2,123 @@ package com.example.exerite_11;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.SearchView;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link JournalFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
 public class JournalFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public JournalFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment JournalFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static JournalFragment newInstance(String param1, String param2) {
-        JournalFragment fragment = new JournalFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private RecyclerView journalRV;
+    private SearchView searchView;
+    private Button addJournalButton;
+    private JournalRvAdapter journalAdapter;
+    private List<JournalModel> journalData;
+    private List<JournalModel> filteredData;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.activity_journal_view, container, false);
 
-        // Initialize the Floating Action Button
-        Button AddJourbtn = view.findViewById(R.id.journal_add_button);
+        // Initialize the SearchView, RecyclerView, and Button
+        searchView = view.findViewById(R.id.searchEditText);
+        journalRV = view.findViewById(R.id.journalRV);
+        addJournalButton = view.findViewById(R.id.journal_add_button);
 
-        // Set an OnClickListener on the Floating Action Button
-        AddJourbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Create an intent to start the AddJournalActivity
-                Intent intent = new Intent(getActivity(), AddJournalActivity.class);
+        journalData = new ArrayList<>();
+        filteredData = new ArrayList<>();
+
+        // Setup RecyclerView and its adapter
+        journalAdapter = new JournalRvAdapter(getContext(), filteredData, position -> {
+            if (position == 0) {
+                // Add Journal item clicked, navigate to AddJournalActivity
+                Intent intent = new Intent(getContext(), AddJournalActivity.class);
+                startActivity(intent);
+            } else {
+                // Existing Journal item clicked, open for editing
+                JournalModel journal = filteredData.get(position - 1);
+                Intent intent = new Intent(getContext(), AddJournalActivity.class);
+                intent.putExtra("journal", journal);
                 startActivity(intent);
             }
         });
 
-        return view;}
+        // Set the layout manager for the RecyclerView
+        journalRV.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        journalRV.setAdapter(journalAdapter);
+
+        // Load journals from the database
+        loadJournals();
+
+        // Set an OnClickListener for the FloatingActionButton to add a new journal
+        addJournalButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), AddJournalActivity.class);
+            startActivity(intent);
+        });
+
+        // Set an OnQueryTextListener for the SearchView to filter journals
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterJournals(newText);
+                return true;
+            }
+        });
+
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Reload journals when the fragment resumes
+        loadJournals();
+    }
+
+    // Load journals from the database and update the adapter
+    private void loadJournals() {
+        DBHelper databaseManager = new DBHelper();
+        journalData = databaseManager.getAllJournals();
+        filteredData.clear();
+        filteredData.addAll(journalData);
+        journalAdapter.updateList(filteredData);
+    }
+
+    // Filter journals based on the search query
+    private void filterJournals(String searchText) {
+        if (TextUtils.isEmpty(searchText)) {
+            filteredData.clear();
+            filteredData.addAll(journalData);
+        } else {
+            List<JournalModel> filteredList = new ArrayList<>();
+            for (JournalModel journal : journalData) {
+                if (journal.getTitle().toLowerCase().contains(searchText.toLowerCase())) {
+                    filteredList.add(journal);
+                }
+            }
+            filteredData.clear();
+            filteredData.addAll(filteredList);
+        }
+        journalAdapter.updateList(filteredData);
+    }
 }
