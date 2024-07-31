@@ -1,5 +1,6 @@
 package com.example.exerite_11;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,7 +62,21 @@ public class JournalFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.activity_journal_view, container, false);
-    }
+
+        View view = inflater.inflate(R.layout.activity_journal_view, container, false);
+
+        // Initialize the Floating Action Button
+        Button AddJourbtn = view.findViewById(R.id.journal_add_button);
+
+        // Set an OnClickListener on the Floating Action Button
+        AddJourbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create an intent to start the AddJournalActivity
+                Intent intent = new Intent(getActivity(), AddJournalActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        return view;}
 }

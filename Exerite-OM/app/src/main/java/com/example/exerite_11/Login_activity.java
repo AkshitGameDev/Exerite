@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class Login_activity extends AppCompatActivity {
     private static final String SHARED_PREF_NAME = "my_shared_pref";
     private static final String KEY_IS_LOGGED_IN = "is_logged_in";
+    private static final String KEY_USER_EMAIL = "user_email"; // Key for st
     private EditText userEmail;
     private EditText editTextPassword;
     private Button buttonLogin;
@@ -69,7 +70,7 @@ public class Login_activity extends AppCompatActivity {
             } else {
                 boolean checkuserpass = DB.checkPassword(username, password);
                 if (checkuserpass) {
-                    setLoggedInStatus(true);
+                    setLoggedInStatus(true,username);
                     Intent intent = new Intent(this, Home_Activity.class);
                     intent.putExtra("USER_EMAIL", username);
                     startActivity(intent);
@@ -81,10 +82,16 @@ public class Login_activity extends AppCompatActivity {
         }
     }
 
-    private void setLoggedInStatus(boolean isLoggedIn) {
+    private void setLoggedInStatus(boolean isLoggedIn,String email) {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(KEY_IS_LOGGED_IN, isLoggedIn);
+        editor.putString(KEY_USER_EMAIL, null);
         editor.apply();
     }
+    public static String getUserEmail(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_USER_EMAIL, null);
+    }
+
 }

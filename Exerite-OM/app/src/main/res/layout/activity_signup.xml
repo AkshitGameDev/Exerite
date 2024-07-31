@@ -23,7 +23,6 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="80dp"
-        android:src="@drawable/ic_profile_placeholder"
         app:srcCompat="@drawable/logo" />
 
     <TextView

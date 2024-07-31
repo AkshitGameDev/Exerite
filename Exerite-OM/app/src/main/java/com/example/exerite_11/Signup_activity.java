@@ -18,7 +18,7 @@ public class Signup_activity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
 
         // Enable the back button in the action bar
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Find the "Already have an account?" TextView by its ID
         TextView textViewSignIn = findViewById(R.id.textViewSignIn);

@@ -5,17 +5,26 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
 import androidx.annotation.Nullable;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class DBHelper extends SQLiteOpenHelper {
     // Database version
     private static final int DATABASE_VERSION = 1;
     // Database name
-    private static final String DATABASE_NAME = "User_data.db";
+    private static final String DATABASE_NAME = "Exerite1V.db";
 
+    // Table and columns
+    private static final String TABLE_JOURNALS = "Journals";
+    private static final String COLUMN_ID = "journal_id";
+    private static final String COLUMN_TITLE = "title";
+    private static final String COLUMN_DESCRIPTION = "description";
+    private static final String COLUMN_EMAIL = "email"; // New column for email
     public DBHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -31,10 +40,21 @@ public class DBHelper extends SQLiteOpenHelper {
 
         String CREATE_WORKOUTS_TABLE = "CREATE TABLE workouts (" +
                 "workoutid INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "userid INTEGER," + "WorkoutName TEXT, " +
+                "userid INTEGER," +
+                "WorkoutName TEXT, " +
                 "date TEXT," +
                 "description TEXT)";
         db.execSQL(CREATE_WORKOUTS_TABLE);
+
+        String CREATE_TABLE_JOURNALS =
+                "CREATE TABLE " + TABLE_JOURNALS + " (" +
+                        COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        COLUMN_TITLE + " TEXT NOT NULL, " +
+                        COLUMN_DESCRIPTION + " TEXT NOT NULL, " +
+                        COLUMN_EMAIL + " TEXT" + // Add email column
+                        ");";
+        db.execSQL(CREATE_TABLE_JOURNALS);
+
     }
 
     @Override
@@ -42,6 +62,7 @@ public class DBHelper extends SQLiteOpenHelper {
         // Drop older table if exists and create fresh table
         db.execSQL("DROP TABLE IF EXISTS users");
         db.execSQL("DROP TABLE IF EXISTS workouts");
+        db.execSQL("DROP TABLE IF EXISTS Journals");
         onCreate(db);
     }
 
@@ -97,4 +118,65 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close(); // Closing database connection
         return result != -1;
     }
+
+    public void insertJournal(String title, String description, String email) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_TITLE, title);
+        values.put(COLUMN_DESCRIPTION, description);
+        values.put(COLUMN_EMAIL, email);
+
+        long result = db.insert(TABLE_JOURNALS, null, values);
+        if (result == -1) {
+            Log.e("DatabaseHelper", "Error inserting journal");
+        } else {
+            Log.d("DatabaseHelper", "Journal inserted successfully");
+        }
+
+        db.close();
+    }
+
+    // Update an existing journal
+    public void updateJournal(int id, String newTitle, String newDescription, String newEmail) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_TITLE, newTitle);
+        values.put(COLUMN_DESCRIPTION, newDescription);
+        values.put(COLUMN_EMAIL, newEmail);
+
+        int result = db.update(TABLE_JOURNALS, values, COLUMN_ID + " = ?", new String[]{String.valueOf(id)});
+        if (result == 0) {
+            Log.e("DatabaseHelper", "Error updating journal");
+        } else {
+            Log.d("DatabaseHelper", "Journal updated successfully");
+        }
+
+        db.close();
+    }
+
+    // Retrieve all journals
+    public ArrayList<JournalModel> getAllJournals() {
+        ArrayList<JournalModel> journals = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT * FROM " + TABLE_JOURNALS;
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int journalId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID));
+                String title = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TITLE));
+                String description = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DESCRIPTION));
+                String email = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_EMAIL));
+
+                JournalModel journal = new JournalModel(journalId, title, description, email);
+                journals.add(journal);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return journals;
+    }
+
+
 }
