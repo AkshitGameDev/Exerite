@@ -1,24 +1,27 @@
 package com.example.exerite_11;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class JournalRvAdapter extends RecyclerView.Adapter<JournalRvAdapter.JournalViewHolder> {
 
     private final Context context;
-    private List<JournalModel> journalList;
+    private ArrayList<JournalModel> journalList;
     private final OnItemClickListener listener;
 
     public interface OnItemClickListener {
         void onItemClick(int position);
     }
 
-    public JournalRvAdapter(Context context, List<JournalModel> journalList, OnItemClickListener listener) {
+    public JournalRvAdapter(Context context, ArrayList<JournalModel> journalList, OnItemClickListener listener) {
         this.context = context;
         this.journalList = journalList;
         this.listener = listener;
@@ -33,18 +36,21 @@ public class JournalRvAdapter extends RecyclerView.Adapter<JournalRvAdapter.Jour
 
     @Override
     public void onBindViewHolder(@NonNull JournalViewHolder holder, int position) {
-            JournalModel journal = journalList.get(position - 1); // Adjust for add button
-            holder.lblTitle.setText(journal.getTitle());
+            JournalModel journal = journalList.get(position); // Adjust for add button
+// Log the data being set
+       // Log.d("JournalRvAdapter", "Binding journal: " + journal.getTitle() + ", " + journal.getDescription());
+
+        holder.lblTitle.setText(journal.getTitle());
             holder.txtDescription.setText(journal.getDescription());
 
     }
 
     @Override
     public int getItemCount() {
-        return journalList.size() + 1; // Extra item for add button
+        return journalList.size(); // Extra item for add button
     }
 
-    public void updateList(List<JournalModel> newList) {
+    public void updateList(ArrayList<JournalModel> newList) {
         journalList = newList;
         notifyDataSetChanged();
     }

@@ -55,10 +55,11 @@
     <!-- RecyclerView for displaying journal entries -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/journalRV"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_below="@id/recentsTextView"
+        android:layout_width="384dp"
+        android:layout_height="450dp"
         android:layout_above="@id/journal_add_button"
-        android:layout_marginTop="8dp" />
+        android:layout_below="@id/recentsTextView"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="-629dp" />
 
 </RelativeLayout>

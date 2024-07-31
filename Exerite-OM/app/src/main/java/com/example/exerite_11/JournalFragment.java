@@ -3,18 +3,20 @@ package com.example.exerite_11;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.SearchView;
+import androidx.appcompat.widget.SearchView;
+
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +27,8 @@ public class JournalFragment extends Fragment {
     private SearchView searchView;
     private Button addJournalButton;
     private JournalRvAdapter journalAdapter;
-    private List<JournalModel> journalData;
-    private List<JournalModel> filteredData;
+    private ArrayList<JournalModel> journalData;
+    private ArrayList<JournalModel> filteredData;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -45,21 +47,20 @@ public class JournalFragment extends Fragment {
 
         // Setup RecyclerView and its adapter
         journalAdapter = new JournalRvAdapter(getContext(), filteredData, position -> {
-            if (position == 0) {
-                // Add Journal item clicked, navigate to AddJournalActivity
+            if (position < filteredData.size()) {
+                JournalModel journal = filteredData.get(position);
                 Intent intent = new Intent(getContext(), AddJournalActivity.class);
+                intent.putExtra("journalId", journal.getId()); // Pass the correct journal ID
                 startActivity(intent);
             } else {
-                // Existing Journal item clicked, open for editing
-                JournalModel journal = filteredData.get(position - 1);
+                // Handle case where position is out of bounds
                 Intent intent = new Intent(getContext(), AddJournalActivity.class);
-                intent.putExtra("journal", journal);
                 startActivity(intent);
             }
         });
 
         // Set the layout manager for the RecyclerView
-        journalRV.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        journalRV.setLayoutManager(new LinearLayoutManager(getContext()));
         journalRV.setAdapter(journalAdapter);
 
         // Load journals from the database
@@ -97,8 +98,16 @@ public class JournalFragment extends Fragment {
 
     // Load journals from the database and update the adapter
     private void loadJournals() {
-        DBHelper databaseManager = new DBHelper();
+        DBHelper databaseManager = new DBHelper(getContext());
         journalData = databaseManager.getAllJournals();
+
+        /*Log each journal entry
+        for (JournalModel journal : journalData) {
+            Log.d("JournalFragment", "Loaded Journal: " + journal.getTitle() + ", " + journal.getDescription());
+        }
+
+         */
+
         filteredData.clear();
         filteredData.addAll(journalData);
         journalAdapter.updateList(filteredData);

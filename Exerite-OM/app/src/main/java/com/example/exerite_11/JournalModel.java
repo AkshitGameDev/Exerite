@@ -9,6 +9,11 @@ public class JournalModel implements Serializable {
     private String email; // New field for email
 
     // Constructor
+
+    public JournalModel()
+    {
+
+    }
     public JournalModel(int id, String title, String description, String email) {
         this.id = id;
         this.title = title;

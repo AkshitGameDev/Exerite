@@ -154,6 +154,20 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    public JournalModel getJournalById(int journal_id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query("Journals", new String[]{"journal_id", "title", "description","email"}, "journal_id=?", new String[]{String.valueOf(journal_id)}, null, null, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            String title = cursor.getString(cursor.getColumnIndexOrThrow("title"));
+            String description = cursor.getString(cursor.getColumnIndexOrThrow("description"));
+            String useremail = cursor.getString(cursor.getColumnIndexOrThrow("email"));
+
+            cursor.close();
+            return new JournalModel(journal_id, title, description,useremail);
+        }
+        return null;
+    }
+
     // Retrieve all journals
     public ArrayList<JournalModel> getAllJournals() {
         ArrayList<JournalModel> journals = new ArrayList<>();
