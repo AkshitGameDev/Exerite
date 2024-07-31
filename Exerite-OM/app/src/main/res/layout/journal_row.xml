@@ -44,15 +44,15 @@
                 app:layout_constraintVertical_bias="0.658" />
 
             <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:id="@+id/journal_del_btn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_marginEnd="28dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.46"
-                app:srcCompat="@drawable/rounded_button" />
+                app:srcCompat="@android:drawable/ic_menu_delete" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

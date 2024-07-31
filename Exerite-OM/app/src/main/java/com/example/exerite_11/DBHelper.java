@@ -191,6 +191,10 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return journals;
     }
-
+    public void deleteJournal(int journal_id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete("Journals", "journal_id = ?", new String[]{String.valueOf(journal_id)});
+        db.close();
+    }
 
 }
