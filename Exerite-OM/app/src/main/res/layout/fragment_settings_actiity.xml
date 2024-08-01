@@ -1,146 +1,43 @@
-<androidx.constraintlayout.widget.ConstraintLayout   xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    tools:context=".SettingsActiity">
-
-    <!-- Greeting TextView -->
-
-    <!-- Exercise Streak ProgressBar -->
-
-    <!-- Exercise Streak TextView -->
-
-    <!-- Diet Streak ProgressBar -->
-
-    <!-- Diet Streak TextView -->
-
-    <!-- Edit Profile Button -->
-
-    <!-- Log Out Button -->
-
-
-    <Button
-        android:id="@+id/editProfileButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/dietProgressBar"
-        android:backgroundTint="#E1EBEF"
-        android:text="@string/edit_profile"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.605" />
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <TextView
-        android:id="@+id/exerciseStreakTextView"
+        android:id="@+id/greetingTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/greetingTextView"
-        android:layout_alignStart="@id/exerciseProgressBar"
-        android:text="@string/exercise_streak_8_10"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.064"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.479" />
+        android:layout_marginTop="200dp"
+        android:text="Hello, User!"
+        android:textSize="24sp"
+        android:layout_gravity="center_horizontal" />
 
-    <ProgressBar
-        android:id="@+id/exerciseProgressBar"
-        style="?android:attr/progressBarStyleHorizontal"
+    <ImageView
+        android:id="@+id/profile_imgview"
+        android:layout_width="123dp"
+        android:layout_height="131dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="Profile Image"
+        android:src="@drawable/profile" />
+
+    <androidx.camera.view.PreviewView
+        android:id="@+id/cameraPreviewView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/greetingTextView"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="127dp"
-        android:progress="80"
-        android:progressDrawable="@drawable/progressbar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.62" />
-
-    <TextView
-        android:id="@+id/dietStreakTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/exerciseStreakTextView"
-        android:layout_alignStart="@id/dietProgressBar"
-        android:text="@string/diet_streak_3_10"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.057"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.404" />
-
-    <ProgressBar
-        android:id="@+id/dietProgressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="348dp"
-        android:layout_height="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:maxHeight="16dip"
-        android:minWidth="16dip"
-        android:minHeight="100dp"
-        android:progress="30"
-        android:progressDrawable="@drawable/progressbar"
-        android:progressTint="#FFC107"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.43" />
+        android:layout_height="300dp"
+        android:visibility="gone"
+        android:layout_marginBottom="16dp" />
 
     <Button
         android:id="@+id/logOutButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editProfileButton"
-        android:backgroundTint="#d6d6d6"
-        android:foregroundTint="#000000"
-        android:text="@string/log_out"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.973" />
+        android:layout_marginVertical="8dp"
+        android:backgroundTint="#757575"
+        android:text="Sign Out" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="60dp"
-        android:src="@drawable/asset_23"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/greetingTextView"
-        android:layout_width="57dp"
-        android:layout_height="31dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="12dp"
-        android:text="@string/hey"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

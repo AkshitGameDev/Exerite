@@ -14,18 +14,18 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="23dp"
         android:layout_marginTop="13dp"
-        app:srcCompat="@drawable/asset_23" />
+        app:srcCompat="@drawable/profile" />
 
     <TextView
         android:id="@+id/NameDisplayField"
-        android:layout_width="261dp"
-        android:layout_height="55dp"
+        android:layout_width="197dp"
+        android:layout_height="59dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="27dp"
-        android:layout_marginEnd="27dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="91dp"
         android:layout_toEndOf="@+id/imageView13"
         android:fontFamily="sans-serif"
         android:text="Hey, Name"
@@ -82,6 +82,16 @@
         app:srcCompat="@drawable/exersise"
         android:onClick="image_exersise"/>
 
+    <ImageView
+        android:id="@+id/img_notifcation_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_alignEnd="@id/NameDisplayField"
+
+        android:src="@drawable/ic_notif48" />
 
 
 </RelativeLayout>

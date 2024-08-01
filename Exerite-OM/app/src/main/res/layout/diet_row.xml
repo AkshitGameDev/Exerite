@@ -4,17 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:cardBackgroundColor="#FEF7FF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:background="@drawable/but_4" >
+            android:layout_marginTop="10dp"
+            android:background="@drawable/but_4">
 
             <TextView
 

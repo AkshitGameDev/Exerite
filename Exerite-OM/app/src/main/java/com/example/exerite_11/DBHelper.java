@@ -34,9 +34,12 @@ public class DBHelper extends SQLiteOpenHelper {
         // Create the users table
         String CREATE_USERS_TABLE = "CREATE TABLE users (" +
                 "userid INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "email TEXT," +
-                "password TEXT)";
+                "email TEXT NOT NULL," +
+                "password TEXT NOT NULL," +
+                "username TEXT NOT NULL,"+
+                "profile_image BLOB)";
         db.execSQL(CREATE_USERS_TABLE);
+
 
         String CREATE_WORKOUTS_TABLE = "CREATE TABLE workouts (" +
                 "workoutid INTEGER PRIMARY KEY AUTOINCREMENT," +

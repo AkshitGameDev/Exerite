@@ -37,7 +37,7 @@ public class EditProfile extends AppCompatActivity {
     }
 
     public  void  SavingChanges(String _name){
-        SettingsActiity.name.setText("Hey, " + _name.substring(0, 4) + "..." + "!");
+       // SettingsActiity.name.setText("Hey, " + _name.substring(0, 4) + "..." + "!");
         HomeFragment.name.setText("Hey, " + _name.substring(0, 4) + "...");
         startActivity(new Intent(EditProfile.this , SettingsActiity.class));
     }
