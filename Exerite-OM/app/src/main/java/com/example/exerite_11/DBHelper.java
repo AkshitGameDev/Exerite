@@ -69,11 +69,12 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertData(String email, String password) {
+    public boolean insertData(String email, String password,String username) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("email", email);
         values.put("password", password);
+        values.put("username", username);
         long result = db.insert("users", null, values);
         db.close(); // Closing database connection
         return result != -1;

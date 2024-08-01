@@ -13,13 +13,11 @@ import androidx.appcompat.app.AppCompatActivity;
 public class Login_activity extends AppCompatActivity {
     private static final String SHARED_PREF_NAME = "my_shared_pref";
     private static final String KEY_IS_LOGGED_IN = "is_logged_in";
-    private static final String KEY_USER_EMAIL = "user_email"; // Key for st
+    private static final String KEY_USER_EMAIL = "user_email";
     private EditText userEmail;
     private EditText editTextPassword;
     private Button buttonLogin;
     private Button signUpButton;
-
-    public static String name = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,51 +45,37 @@ public class Login_activity extends AppCompatActivity {
     }
 
     private void loginUser() {
-        DBHelper DB;
-        DB = new DBHelper(this);
+        DBHelper DB = new DBHelper(this);
 
         String username = userEmail.getText().toString().trim();
-        name = userEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
+
         if (username.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Please fill required information", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
         } else {
-            boolean checkuser = DB.checkUserEmail(username);
-            if (!checkuser) {
-                boolean insert = DB.insertData(username, password);
-                if (insert) {
-                    Toast.makeText(this, "Registration success", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(this, Home_Activity.class);
-                    intent.putExtra("USER_EMAIL", username);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(this, "Registration failed", Toast.LENGTH_SHORT).show();
-                }
+            boolean checkUserPass = DB.checkPassword(username, password);
+            if (checkUserPass) {
+                setLoggedInStatus(true, username);
+                Intent intent = new Intent(this, Home_Activity.class);
+                intent.putExtra("USER_EMAIL", username);
+                startActivity(intent);
+                finish();
             } else {
-                boolean checkuserpass = DB.checkPassword(username, password);
-                if (checkuserpass) {
-                    setLoggedInStatus(true,username);
-                    Intent intent = new Intent(this, Home_Activity.class);
-                    intent.putExtra("USER_EMAIL", username);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    Toast.makeText(this, "Invalid username or password", Toast.LENGTH_SHORT).show();
-                }
+                Toast.makeText(this, "Invalid username or password", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    private void setLoggedInStatus(boolean isLoggedIn,String email) {
+    private void setLoggedInStatus(boolean isLoggedIn, String email) {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(KEY_IS_LOGGED_IN, isLoggedIn);
-        editor.putString(KEY_USER_EMAIL, null);
+        editor.putString(KEY_USER_EMAIL, email); // Store the email instead of null
         editor.apply();
     }
+
     public static String getUserEmail(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getString(KEY_USER_EMAIL, null);
     }
-
 }
