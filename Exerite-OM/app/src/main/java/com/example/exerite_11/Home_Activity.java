@@ -35,6 +35,7 @@ public class Home_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        NotificationScheduler.scheduleDailyNotifications(this);
 
 
         userEmail = getIntent().getStringExtra("USER_EMAIL");

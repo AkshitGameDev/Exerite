@@ -17,7 +17,7 @@ public class DBHelper extends SQLiteOpenHelper {
     // Database version
     private static final int DATABASE_VERSION = 1;
     // Database name
-    private static final String DATABASE_NAME = "Exerite1V.db";
+    private static final String DATABASE_NAME = "Exerite2V.db";
 
     // Table and columns
     private static final String TABLE_JOURNALS = "Journals";

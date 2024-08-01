@@ -1,5 +1,6 @@
 package com.example.exerite_11;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +38,9 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
+
+    ImageView notification_btn;
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -57,6 +62,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+       // NotificationScheduler.scheduleDailyNotifications(getContext());
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -79,8 +85,17 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         name = rootView.findViewById(R.id.NameDisplayField);
-
+        notification_btn=rootView.findViewById(R.id.img_notifcation_btn);
         name.setText(TrimIfNeeded());
+
+        notification_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(requireContext(), NotificationActivity.class);
+                startActivity(intent);
+
+            }
+        });
 
         return rootView;
     }
