@@ -15,7 +15,7 @@ import java.util.Date;
 
 public class DBHelper extends SQLiteOpenHelper {
     // Database version
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     // Database name
     private static final String DATABASE_NAME = "Exerite2V.db";
 
@@ -36,7 +36,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "userid INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "email TEXT NOT NULL," +
                 "password TEXT NOT NULL," +
-                "username TEXT NOT NULL,"+
+                "username TEXT NOT NULL," +
                 "profile_image BLOB)";
         db.execSQL(CREATE_USERS_TABLE);
 

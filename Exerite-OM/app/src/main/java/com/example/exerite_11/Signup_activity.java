@@ -1,5 +1,7 @@
 package com.example.exerite_11;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.MenuItem;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -16,6 +18,10 @@ public class Signup_activity extends AppCompatActivity {
     private EditText username;
     private Button signup_btn;
     DBHelper dbobj;
+
+    private static final String SHARED_PREF_NAME = "my_shared_pref";
+    private static final String KEY_USER_NAME = "user_name";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +29,7 @@ public class Signup_activity extends AppCompatActivity {
 
         // Enable the back button in the action bar
        // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        username =findViewById(R.id.editTextUsername);
+        username =findViewById(R.id.editTextusername);
         userEmail=findViewById(R.id.editTextEmail);
         password=findViewById(R.id.editTextPassword);
         signup_btn=findViewById(R.id.buttonSignUp);
@@ -65,7 +71,7 @@ public class Signup_activity extends AppCompatActivity {
         String enteredUsername = username.getText().toString().trim();
         String enteredEmail = userEmail.getText().toString().trim();
         String enteredPassword = password.getText().toString().trim();
-
+        saveUserNameToPreferences(enteredUsername);
         if (enteredUsername.isEmpty() || enteredEmail.isEmpty() || enteredPassword.isEmpty()) {
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
             return;
@@ -83,7 +89,7 @@ public class Signup_activity extends AppCompatActivity {
         }
 
         // Insert user into the database
-        boolean isInserted = dbobj.insertData(enteredUsername, enteredEmail, enteredPassword);
+        boolean isInserted = dbobj.insertData(enteredEmail, enteredPassword, enteredUsername);
         if (isInserted) {
             Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show();
             // Redirect to login page
@@ -97,5 +103,18 @@ public class Signup_activity extends AppCompatActivity {
     private boolean isValidEmail(String email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
+    private void saveUserNameToPreferences(String userName) {
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(KEY_USER_NAME, userName);
+        editor.apply();
+    }
+
+    public static String getUserNameFromPreferences(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_USER_NAME, null);
+    }
+
+
 
 }

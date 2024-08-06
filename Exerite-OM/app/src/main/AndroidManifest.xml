@@ -76,6 +76,16 @@
             android:name=".Home_Activity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+        <receiver android:name=".ExeriteWidgetProvider"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/ex_widget_info" />
+        </receiver>
         <activity
             android:name=".MainActivity"
             android:exported="true">

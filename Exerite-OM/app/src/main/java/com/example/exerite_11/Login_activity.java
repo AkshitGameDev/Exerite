@@ -18,6 +18,7 @@ public class Login_activity extends AppCompatActivity {
     private EditText editTextPassword;
     private Button buttonLogin;
     private Button signUpButton;
+    DBHelper DB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,7 @@ public class Login_activity extends AppCompatActivity {
         editTextPassword = findViewById(R.id.editTextPassword);
         buttonLogin = findViewById(R.id.buttonLogin);
         signUpButton = findViewById(R.id.signUpButton);
-
+        DB= new DBHelper(Login_activity.this);
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,19 +46,19 @@ public class Login_activity extends AppCompatActivity {
     }
 
     private void loginUser() {
-        DBHelper DB = new DBHelper(this);
 
-        String username = userEmail.getText().toString().trim();
+
+        String useremail = userEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
-        if (username.isEmpty() || password.isEmpty()) {
+        if (useremail.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
         } else {
-            boolean checkUserPass = DB.checkPassword(username, password);
+            boolean checkUserPass = DB.checkPassword(useremail, password);
             if (checkUserPass) {
-                setLoggedInStatus(true, username);
+                setLoggedInStatus(true, useremail);
                 Intent intent = new Intent(this, Home_Activity.class);
-                intent.putExtra("USER_EMAIL", username);
+                intent.putExtra("USER_EMAIL", useremail);
                 startActivity(intent);
                 finish();
             } else {

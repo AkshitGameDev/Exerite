@@ -72,9 +72,9 @@ public class HomeFragment extends Fragment {
     }
 
     public String TrimIfNeeded(){
-        String temp = Login_activity.name;
-        if(temp.length() >= 5){
-            temp = "Hey, " + temp.substring(0, 4) + "...";
+        String temp = Signup_activity.getUserNameFromPreferences(getContext());
+        if(temp.length() >= 7){
+            temp = "Hey, " + temp.substring(0, 6) + "...";
             return temp;
         }
         else return temp;

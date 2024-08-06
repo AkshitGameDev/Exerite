@@ -115,7 +115,7 @@ public class SettingsActiity extends Fragment {
     }
 
     private String trimIfNeeded() {
-        String temp = Login_activity.name;
+        String temp = Signup_activity.getUserNameFromPreferences(getContext());
         if (temp.length() >= 7) {
             temp = "Hey, " + temp.substring(0, 4) + "..." + "!";
             return temp;

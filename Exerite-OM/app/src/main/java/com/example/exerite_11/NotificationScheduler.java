@@ -36,7 +36,7 @@ public class NotificationScheduler {
             Intent intent = new Intent(context, NotificationReceiver.class);
             intent.putExtra("title", titles[i]);
             intent.putExtra("body", bodies[i]);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, i, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, i, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
             alarmManager.setRepeating(
                     AlarmManager.RTC_WAKEUP,

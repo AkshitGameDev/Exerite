@@ -43,14 +43,14 @@ public class NonVegActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_non_veg2);
-        recyclerView = findViewById(R.id.NvegRV);
+        recyclerView = findViewById(R.id.nonvegRV);
         SetupDietModels();
 
         adapter = new GenericDietRVAdapter(this, dietModels);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        searchView = findViewById(R.id.NVegSearch);
+        searchView = findViewById(R.id.nonvegSV);
         searchView.clearFocus();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
