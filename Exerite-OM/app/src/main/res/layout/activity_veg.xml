@@ -4,49 +4,70 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     tools:context=".VegActivity">
 
-    <ImageView
-        android:id="@+id/veg_backbtn"
-        android:layout_width="28dp"
-        android:layout_height="31dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="41dp"
-        app:srcCompat="@drawable/icon_leftarrow" />
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/VegS"
-        app:iconifiedByDefault="false"
-        app:queryHint="@string/search_hint"
-        android:layout_width="329dp"
-        android:layout_height="40dp"
-        android:layout_below="@id/veg_backbtn"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="-40dp"
-        android:layout_marginEnd="3dp"
-        android:layout_marginBottom="17dp"
-        android:layout_toEndOf="@id/veg_backbtn"
-        android:background="@drawable/searchview" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/VegRV"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/journalTitleTextView"
+        android:layout_width="257dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/VegS"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="46dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/vegdiet"
+        android:textSize="34sp"
+        android:textStyle="bold" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+    <Button
+        android:id="@+id/ex_add_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:clickable="true"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        android:layout_alignParentTop="true"
+        android:backgroundTint="#b7daeb"
+        android:text="+"
+        android:textSize="36sp"
+        android:textStyle="bold" />
+
+    <!-- SearchView for filtering journal entries -->
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/ex_SV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/journalTitleTextView"
+        android:layout_marginTop="16dp"
+        android:iconifiedByDefault="false"
+        android:queryHint="Search Journals" />
+
+    <!-- "Recents" TextView -->
+    <TextView
+        android:id="@+id/recentsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ex_SV"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/recents"
+        android:textSize="34sp"
+        android:textStyle="bold" />
+
+    <!-- RecyclerView for displaying journal entries -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ex_RV"
+        android:layout_width="374dp"
+        android:layout_height="match_parent"
+        android:layout_above="@id/ex_add_btn"
+        android:layout_below="@id/recentsTextView"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="-715dp" />
+
+    <ImageView
+        android:id="@+id/arrowbtn"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_alignLeft="@id/journalTitleTextView"
+        android:layout_alignParentStart="true"
+        app:srcCompat="@drawable/icon_leftarrow" />
 
 </RelativeLayout>

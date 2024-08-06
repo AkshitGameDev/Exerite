@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -16,6 +18,9 @@ public class NonVegActivity extends AppCompatActivity {
     ArrayList<DietModel> dietModels = new ArrayList<>();
     RecyclerView recyclerView;
     GenericDietRVAdapter adapter;
+
+    ImageView nvarrowbtn;
+
 
     private void SetupDietModels(){
         String[] Name = getResources().getStringArray(R.array.non_veg_food_names); //change
@@ -43,15 +48,22 @@ public class NonVegActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_non_veg2);
-        recyclerView = findViewById(R.id.nonvegRV);
+        recyclerView = findViewById(R.id.ex_RV);
         SetupDietModels();
+        nvarrowbtn=findViewById(R.id.arrowbtn);
 
         adapter = new GenericDietRVAdapter(this, dietModels);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        searchView = findViewById(R.id.nonvegSV);
+        searchView = findViewById(R.id.ex_SV);
         searchView.clearFocus();
+         nvarrowbtn.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 finish();
+             }
+         });
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

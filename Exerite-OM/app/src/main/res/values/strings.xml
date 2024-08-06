@@ -35,5 +35,10 @@
     <string name="recents">Recents</string>
     <string name="journal12">Journal</string>
     <string name="search">Search</string>
+    <string name="vegdiet">VEG DIET</string>
+    <string name="nonvegdiet">NON VEG DIET</string>
+    <string name="drinks">DRINK</string>
+
+
 
 </resources>

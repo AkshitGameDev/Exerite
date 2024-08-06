@@ -18,18 +18,18 @@
 
     <TextView
         android:id="@+id/NameDisplayField"
-        android:layout_width="197dp"
-        android:layout_height="59dp"
+        android:layout_width="193dp"
+        android:layout_height="46dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="22dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="35dp"
         android:layout_marginEnd="91dp"
         android:layout_toEndOf="@+id/imageView13"
         android:fontFamily="sans-serif"
         android:text="Hey, Name"
-        android:textSize="32sp" />
+        android:textSize="26sp" />
 
     <TextView
         android:id="@+id/textView2"
@@ -42,45 +42,42 @@
         android:layout_marginEnd="29dp"
         android:layout_toEndOf="@+id/imageView13"
         android:text="@string/tagline"
-        android:textSize="16sp" />
+        android:textSize="12sp" />
 
     <ImageView
         android:id="@+id/diet_home"
-        android:layout_width="300dp"
-        android:layout_height="150dp"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
         android:layout_below="@+id/exersise_home"
         android:layout_alignParentEnd="false"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="-1dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="-6dp"
-        app:srcCompat="@drawable/diet"
         android:contentDescription="@string/todo"
-        android:onClick="image_diet"/>
+        android:onClick="image_diet"
+        app:srcCompat="@drawable/diet" />
 
     <ImageView
         android:id="@+id/journal_home"
-        android:layout_width="300dp"
-        android:layout_height="150dp"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
         android:layout_below="@+id/diet_home"
         android:layout_alignParentStart="false"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="10dp"
         android:contentDescription="@string/todo"
         android:onClick="image_journal"
         app:srcCompat="@drawable/asset_6" />
 
     <ImageView
         android:id="@+id/exersise_home"
-        android:layout_width="300dp"
-        android:layout_height="150dp"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
         android:layout_below="@+id/imageView13"
-        android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="37dp"
-        android:layout_marginEnd="51dp"
+        android:layout_marginTop="40dp"
         android:contentDescription="@string/todo"
-        app:srcCompat="@drawable/exersise"
-        android:onClick="image_exersise"/>
+        android:onClick="image_exersise"
+        app:srcCompat="@drawable/exersise" />
 
     <ImageView
         android:id="@+id/img_notifcation_btn"

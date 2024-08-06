@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -16,6 +18,8 @@ public class DrinksActivity extends AppCompatActivity {
     ArrayList<DietModel> dietModels = new ArrayList<>();
     RecyclerView recyclerView;
     GenericDietRVAdapter adapter;
+
+    ImageView darrowbtn;
 
     private void SetupDietModels(){
         String[] Name = getResources().getStringArray(R.array.diet_drink_names); //change
@@ -43,14 +47,22 @@ public class DrinksActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drinks);
-        recyclerView = findViewById(R.id.DrinksRV);
+        recyclerView = findViewById(R.id.ex_RV);
         SetupDietModels();
+        darrowbtn=findViewById(R.id.arrowbtn);
 
         adapter = new GenericDietRVAdapter(this, dietModels);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        searchView = findViewById(R.id.DrinksSearch);
+        darrowbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        searchView = findViewById(R.id.ex_SV);
         searchView.clearFocus();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

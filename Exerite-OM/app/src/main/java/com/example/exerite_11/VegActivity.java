@@ -5,6 +5,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -15,6 +17,9 @@ public class VegActivity extends AppCompatActivity {
     ArrayList<DietModel> dietModels = new ArrayList<>();
     RecyclerView recyclerView;
     GenericDietRVAdapter adapter;
+
+    ImageView arrowbtn;
+
 
     private void SetupDietModels(){
         String[] Name = getResources().getStringArray(R.array.veg_food_names); //change
@@ -42,14 +47,25 @@ public class VegActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_veg);
-        recyclerView = findViewById(R.id.VegRV);
+        arrowbtn =findViewById(R.id.arrowbtn);
+
+
+        recyclerView = findViewById(R.id.ex_RV);
         SetupDietModels();
+
 
         adapter = new GenericDietRVAdapter(this, dietModels);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        searchView = findViewById(R.id.VegS);
+        arrowbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        searchView = findViewById(R.id.ex_SV);
         searchView.clearFocus();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

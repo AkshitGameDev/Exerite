@@ -123,6 +123,9 @@ public class DBHelper extends SQLiteOpenHelper {
         return result != -1;
     }
 
+
+
+
     public void insertJournal(String title, String description, String email) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();

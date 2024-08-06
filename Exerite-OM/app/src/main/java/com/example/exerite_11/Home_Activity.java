@@ -111,8 +111,8 @@ public class Home_Activity extends AppCompatActivity {
         Intent intent = new Intent(this, VegActivity.class);
         startActivity(intent);
     }
-    public void image_drinks(View view) {
-        Intent intent = new Intent(Home_Activity.this, DrinksActivity.class);
+    public void image_Drinks(View view) {
+        Intent intent = new Intent(this, DrinksActivity.class);
         startActivity(intent);
     }
 

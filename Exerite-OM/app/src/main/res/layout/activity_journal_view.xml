@@ -20,7 +20,7 @@
 
     <!-- Button for adding a new journal entry -->
     <Button
-        android:id="@+id/journal_add_button"
+        android:id="@+id/ex_add_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -32,7 +32,7 @@
 
     <!-- SearchView for filtering journal entries -->
     <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchEditText"
+        android:id="@+id/ex_SV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/journalTitleTextView"
@@ -45,7 +45,7 @@
         android:id="@+id/recentsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/searchEditText"
+        android:layout_below="@id/ex_SV"
         android:layout_marginTop="16dp"
         android:fontFamily="sans-serif-black"
         android:text="@string/recents"
@@ -54,10 +54,10 @@
 
     <!-- RecyclerView for displaying journal entries -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/journalRV"
+        android:id="@+id/ex_RV"
         android:layout_width="384dp"
         android:layout_height="450dp"
-        android:layout_above="@id/journal_add_button"
+        android:layout_above="@id/ex_add_btn"
         android:layout_below="@id/recentsTextView"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="-629dp" />

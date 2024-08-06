@@ -3,7 +3,6 @@ package com.example.exerite_11;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,6 @@ import androidx.appcompat.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -38,9 +36,9 @@ public class JournalFragment extends Fragment {
         View view = inflater.inflate(R.layout.activity_journal_view, container, false);
 
         // Initialize the SearchView, RecyclerView, and Button
-        searchView = view.findViewById(R.id.searchEditText);
-        journalRV = view.findViewById(R.id.journalRV);
-        addJournalButton = view.findViewById(R.id.journal_add_button);
+        searchView = view.findViewById(R.id.ex_SV);
+        journalRV = view.findViewById(R.id.ex_RV);
+        addJournalButton = view.findViewById(R.id.ex_add_btn);
 
         journalData = new ArrayList<>();
         filteredData = new ArrayList<>();
