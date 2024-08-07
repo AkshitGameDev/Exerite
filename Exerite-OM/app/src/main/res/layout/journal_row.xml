@@ -32,7 +32,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/journaldesc_tv"
+                android:id="@+id/calorie_count"
                 android:layout_width="160dp"
                 android:layout_height="21dp"
                 android:layout_marginStart="28dp"

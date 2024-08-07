@@ -20,19 +20,19 @@
 
             <TextView
 
-                android:id="@+id/journal_title_tv"
+                android:id="@+id/dish_name"
                 android:layout_width="295dp"
                 android:layout_height="36dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif"
-                android:text="@string/dish_name"
+                android:text="Dish"
                 android:textSize="32sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/journaldesc_tv"
+                android:id="@+id/calorie_count"
                 android:layout_width="160dp"
                 android:layout_height="21dp"
                 android:layout_marginStart="28dp"
@@ -47,14 +47,14 @@
 
             <ImageView
                 android:id="@+id/journal_del_btn"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_marginEnd="28dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.46"
-                app:srcCompat="@drawable/rounded_button" />
+                app:srcCompat="@android:drawable/ic_menu_delete" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

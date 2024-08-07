@@ -1,6 +1,5 @@
 package com.example.exerite_11;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class JournalRvAdapter extends RecyclerView.Adapter<JournalRvAdapter.JournalViewHolder> {
 
@@ -37,9 +35,7 @@ public class JournalRvAdapter extends RecyclerView.Adapter<JournalRvAdapter.Jour
 
     @Override
     public void onBindViewHolder(@NonNull JournalViewHolder holder, int position) {
-            JournalModel journal = journalList.get(position); // Adjust for add button
-// Log the data being set
-       // Log.d("JournalRvAdapter", "Binding journal: " + journal.getTitle() + ", " + journal.getDescription());
+        JournalModel journal = journalList.get(position); // Adjust for add button
 
 
         holder.lblTitle.setText(journal.getTitle());
@@ -70,16 +66,13 @@ public class JournalRvAdapter extends RecyclerView.Adapter<JournalRvAdapter.Jour
         TextView lblTitle;
         TextView txtDescription;
         ImageView journal_Del_btn;
-       // View viewAdd;
-       // View viewJournal;
+
 
         public JournalViewHolder(@NonNull View itemView) {
             super(itemView);
             journal_Del_btn = itemView.findViewById(R.id.journal_del_btn);
             lblTitle = itemView.findViewById(R.id.journal_title_tv);
-            txtDescription = itemView.findViewById(R.id.journaldesc_tv);
-           // viewAdd = itemView.findViewById(R.id.viewAdd);
-            //viewJournal = itemView.findViewById(R.id.viewJournal);
+            txtDescription = itemView.findViewById(R.id.calorie_count);
             itemView.setOnClickListener(this);
         }
 

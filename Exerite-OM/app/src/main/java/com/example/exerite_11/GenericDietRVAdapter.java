@@ -4,55 +4,82 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class GenericDietRVAdapter extends RecyclerView.Adapter<GenericDietRVAdapter.MyViewHolder> {
-    ArrayList<DietModel> dietModels;
-    Context context;
+public class GenericDietRVAdapter extends RecyclerView.Adapter<GenericDietRVAdapter.DietViewHolder> {
 
-    public GenericDietRVAdapter(Context context, ArrayList<DietModel> dietModels){
+    private final Context context;
+    private ArrayList<DietModel> dietList;
+    private final OnItemClickListener listener;
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public GenericDietRVAdapter(Context context, ArrayList<DietModel> dietList, OnItemClickListener listener) {
         this.context = context;
-        this.dietModels = dietModels;
+        this.dietList = dietList;
+        this.listener = listener;
     }
 
     @NonNull
     @Override
-    public GenericDietRVAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater= LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.diet_row, parent,false);
-        return new GenericDietRVAdapter.MyViewHolder(view);
+    public DietViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.diet_row, parent, false);
+        return new DietViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull GenericDietRVAdapter.MyViewHolder holder, int position) {
-        holder.Name.setText(dietModels.get(position).getDish());
-        holder.Cal.setText(dietModels.get(position).getCalories());
-    }
-    public void seTilteredList(ArrayList<DietModel> dietModels ){
-        this.dietModels = dietModels;
-        notifyDataSetChanged();
+    public void onBindViewHolder(@NonNull DietViewHolder holder, int position) {
+        DietModel diet = dietList.get(position);
+
+        holder.dishName.setText(diet.getDish());
+        holder.calorieCount.setText(diet.getCalories());
+
+        holder.dietDelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DBHelper dbHelper = new DBHelper(context);
+                dbHelper.deleteDiet(diet.getDish()); // Using diet name for deletion
+                dietList.remove(position);
+                notifyItemRemoved(position);
+            }
+        });
+
+        holder.itemView.setOnClickListener(v -> listener.onItemClick(position));
     }
 
     @Override
     public int getItemCount() {
-        return dietModels.size();
+        return dietList.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public void setFilteredList(ArrayList<DietModel> filteredList) {
+        dietList = filteredList;
+        notifyDataSetChanged();
+    }
 
-        TextView Name;
-        TextView Cal;
+    public void updateList(ArrayList<DietModel> newList) {
+        dietList = newList;
+        notifyDataSetChanged();
+    }
 
-        public MyViewHolder(@NonNull View itemView) {
+    class DietViewHolder extends RecyclerView.ViewHolder {
+
+        TextView dishName;
+        TextView calorieCount;
+        ImageView dietDelBtn;
+
+        public DietViewHolder(@NonNull View itemView) {
             super(itemView);
-            Name = itemView.findViewById(R.id.journal_title_tv);
-            Cal = itemView.findViewById(R.id.journaldesc_tv);
-
+            dishName = itemView.findViewById(R.id.dish_name);
+            calorieCount = itemView.findViewById(R.id.calorie_count);
+            dietDelBtn = itemView.findViewById(R.id.journal_del_btn); // Ensure this matches your layout
         }
     }
 }

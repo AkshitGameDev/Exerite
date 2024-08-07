@@ -1,11 +1,17 @@
 package com.example.exerite_11;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -13,58 +19,50 @@ import java.util.ArrayList;
 
 public class VegActivity extends AppCompatActivity {
 
-    SearchView searchView;
-    ArrayList<DietModel> dietModels = new ArrayList<>();
-    RecyclerView recyclerView;
-    GenericDietRVAdapter adapter;
-
-    ImageView arrowbtn;
-
-
-    private void SetupDietModels(){
-        String[] Name = getResources().getStringArray(R.array.veg_food_names); //change
-        String[] Cal = getResources().getStringArray(R.array.veg_food_calories);//change
-
-        for( int i = 0; i < Name.length; i++){
-            dietModels.add(new DietModel(Name[i], Cal[i]));
-        }
-    }
-    private void fileList(String text) {
-        ArrayList<DietModel> filterList = new ArrayList<>();
-        for (DietModel item : dietModels) {
-            if (item.getDish().toLowerCase().contains(text.toLowerCase())) {
-                filterList.add(item);
-            }
-        }
-        if (filterList.isEmpty()) {
-            Toast.makeText(this, "No data Found", Toast.LENGTH_SHORT).show();
-        } else {
-            adapter.seTilteredList(filterList);
-        }
-    }
+    private SearchView searchView;
+    private ArrayList<DietModel> dietModels = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private GenericDietRVAdapter adapter;
+    private ImageView arrowBtn;
+    private Button addDishButton;
+    private String email, category;
+    private DBHelper dbHelper; // Database helper instance
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_veg);
-        arrowbtn =findViewById(R.id.arrowbtn);
 
+        arrowBtn = findViewById(R.id.arrowbtn);
+        addDishButton = findViewById(R.id.ex_add_btn);
 
+        // Initialize the database helper
+        dbHelper = new DBHelper(this);
+
+        // Retrieve the user email and category
+        email = Login_activity.getUserEmail(VegActivity.this);
+        category = "Veg";
+
+        // Set up the RecyclerView
         recyclerView = findViewById(R.id.ex_RV);
-        SetupDietModels();
-
-
-        adapter = new GenericDietRVAdapter(this, dietModels);
-        recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        arrowbtn.setOnClickListener(new View.OnClickListener() {
+        // Load data from the database
+        loadDietDataFromDatabase();
+
+        // Initialize and set the adapter
+        adapter = new GenericDietRVAdapter(this, dietModels, new GenericDietRVAdapter.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                finish();
+            public void onItemClick(int position) {
+                // Handle item click if needed
             }
         });
+        recyclerView.setAdapter(adapter);
 
+        // Back button functionality
+        arrowBtn.setOnClickListener(v -> finish()); // Finish the activity
+
+        // Set up the search view
         searchView = findViewById(R.id.ex_SV);
         searchView.clearFocus();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -75,11 +73,82 @@ public class VegActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                fileList(newText);
+                filterList(newText);
                 return true;
             }
-
-
         });
+
+        // Button to add a new dish
+        addDishButton.setOnClickListener(v -> showAddDishDialog());
+    }
+
+    private void loadDietDataFromDatabase() {
+        // Clear the existing data
+        dietModels.clear();
+
+        // Fetch data from the database and add it to the list
+        ArrayList<DietModel> dbDietModels = dbHelper.getDiets(email, category);
+        if (dbDietModels != null && !dbDietModels.isEmpty()) {
+            dietModels.addAll(dbDietModels);
+        }
+
+        // Notify the adapter of the data change
+        if (adapter != null) {
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    private void filterList(String text) {
+        ArrayList<DietModel> filteredList = new ArrayList<>();
+        for (DietModel item : dietModels) {
+            if (item.getDish().toLowerCase().contains(text.toLowerCase())) {
+                filteredList.add(item);
+            }
+        }
+        if (filteredList.isEmpty()) {
+            Toast.makeText(this, "No data found", Toast.LENGTH_SHORT).show();
+        } else {
+            adapter.setFilteredList(filteredList);
+        }
+    }
+
+    private void showAddDishDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.dialog_add_diet, null);
+        builder.setView(dialogView);
+
+        EditText editTextDishName = dialogView.findViewById(R.id.editTextDishName);
+        EditText editTextCalories = dialogView.findViewById(R.id.editTextCalories);
+
+        builder.setTitle("Add New Dish")
+                .setPositiveButton("Add", (dialog, which) -> {
+                    String dishName = editTextDishName.getText().toString().trim();
+                    String calories = editTextCalories.getText().toString().trim();
+
+                    if (dishName.isEmpty() || calories.isEmpty()) {
+                        Toast.makeText(VegActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // Save the new dish to the database
+                        saveNewDish(dishName, calories);
+                    }
+                })
+                .setNegativeButton("Cancel", null);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void saveNewDish(String dishName, String calories) {
+        // Insert the new diet into the database
+        boolean isInserted = dbHelper.addDiet(email, category, dishName, calories);
+
+        if (isInserted) {
+            Toast.makeText(this, "Dish added successfully", Toast.LENGTH_SHORT).show();
+            // Reload the data from the database and update the RecyclerView
+            loadDietDataFromDatabase();
+        } else {
+            Toast.makeText(this, "Failed to add dish", Toast.LENGTH_SHORT).show();
+        }
     }
 }

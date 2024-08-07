@@ -1,12 +1,12 @@
 package com.example.exerite_11;
 
+import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -15,28 +15,18 @@ import android.view.ViewGroup;
  */
 public class diet_fragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    ImageView vegbtn, nonvegbtn, drinkbtn;
 
     public diet_fragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment diet_fragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static diet_fragment newInstance(String param1, String param2) {
         diet_fragment fragment = new diet_fragment();
         Bundle args = new Bundle();
@@ -49,6 +39,7 @@ public class diet_fragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -59,8 +50,36 @@ public class diet_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_diet_fragment, container, false);
-    }
+        View view = inflater.inflate(R.layout.fragment_diet_fragment, container, false);
 
+        // Find ImageViews by ID
+        vegbtn = view.findViewById(R.id.Veg);
+        nonvegbtn = view.findViewById(R.id.NonVeg);
+        drinkbtn = view.findViewById(R.id.Drinks);
+
+        // Set OnClickListener for vegbtn
+        vegbtn.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), VegActivity.class);
+            startActivity(intent);
+        });
+
+        // Set OnClickListener for nonvegbtn
+        nonvegbtn.setOnClickListener(v -> {
+            // Handle click event for nonvegbtn
+            // Example: startNewActivity(NonVegActivity.class);
+            Intent intent = new Intent(getContext(), NonVegActivity.class);
+            startActivity(intent);
+        });
+
+        // Set OnClickListener for drinkbtn
+        drinkbtn.setOnClickListener(v -> {
+            // Handle click event for drinkbtn
+            // Example: startNewActivity(DrinksActivity.class);
+            Intent intent = new Intent(getContext(), DrinksActivity.class);
+            startActivity(intent);
+        });
+
+        return view;
+    }
 
 }

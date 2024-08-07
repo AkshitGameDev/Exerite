@@ -15,9 +15,9 @@ import java.util.Date;
 
 public class DBHelper extends SQLiteOpenHelper {
     // Database version
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 4;
     // Database name
-    private static final String DATABASE_NAME = "Exerite2V.db";
+    private static final String DATABASE_NAME = "Exerite4V.db";
 
     // Table and columns
     private static final String TABLE_JOURNALS = "Journals";
@@ -25,6 +25,14 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String COLUMN_TITLE = "title";
     private static final String COLUMN_DESCRIPTION = "description";
     private static final String COLUMN_EMAIL = "email"; // New column for email
+
+    private static final String TABLE_DIET = "DietTable";
+    private static final String DCOLUMN_ID = "diet_id";
+    private static final String DCOLUMN_EMAIL = "email_id";
+    private static final String COLUMN_CATEGORY = "category";
+    private static final String COLUMN_NAME = "diet_name";
+    private static final String COLUMN_CALORIE = "diet_calorie";
+
     public DBHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -58,6 +66,14 @@ public class DBHelper extends SQLiteOpenHelper {
                         ");";
         db.execSQL(CREATE_TABLE_JOURNALS);
 
+        String createTable = "CREATE TABLE " + TABLE_DIET + " (" +
+                DCOLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                DCOLUMN_EMAIL + " TEXT, " +
+                COLUMN_CATEGORY + " TEXT, " +
+                COLUMN_NAME + " TEXT, " +
+                COLUMN_CALORIE + " TEXT)";
+        db.execSQL(createTable);
+
     }
 
     @Override
@@ -66,6 +82,8 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS users");
         db.execSQL("DROP TABLE IF EXISTS workouts");
         db.execSQL("DROP TABLE IF EXISTS Journals");
+        db.execSQL("DROP TABLE IF EXISTS DietTable");
+
         onCreate(db);
     }
 
@@ -123,7 +141,43 @@ public class DBHelper extends SQLiteOpenHelper {
         return result != -1;
     }
 
+    public boolean addDiet(String email, String category, String name, String calorie) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(DCOLUMN_EMAIL, email);
+        values.put(COLUMN_CATEGORY, category);
+        values.put(COLUMN_NAME, name);
+        values.put(COLUMN_CALORIE, calorie);
 
+        long result = db.insert(TABLE_DIET, null, values);
+        db.close();
+
+        return result != -1;
+    }
+
+    public ArrayList<DietModel> getDiets(String email, String category) {
+        ArrayList<DietModel> dietList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT * FROM " + TABLE_DIET + " WHERE " + DCOLUMN_EMAIL + "=? AND " + COLUMN_CATEGORY + "=?";
+        Cursor cursor = db.rawQuery(query, new String[]{email, category});
+
+        if (cursor.moveToFirst()) {
+            do {
+                String name = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME));
+                String calorie = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CALORIE));
+                String demail = cursor.getString(cursor.getColumnIndexOrThrow(DCOLUMN_EMAIL));
+                String dcategory = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CATEGORY));
+
+                dietList.add(new DietModel(demail,dcategory,name,calorie));
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+        return dietList;
+    }
 
 
     public void insertJournal(String title, String description, String email) {
@@ -203,5 +257,28 @@ public class DBHelper extends SQLiteOpenHelper {
         db.delete("Journals", "journal_id = ?", new String[]{String.valueOf(journal_id)});
         db.close();
     }
+
+    public void deleteDiet(String dishName) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        try {
+            // Specify the WHERE clause and arguments
+            String whereClause = COLUMN_NAME + "=?";
+            String[] whereArgs = new String[]{dishName};
+
+            // Perform the delete operation
+            int rowsDeleted = db.delete(TABLE_DIET, whereClause, whereArgs);
+            if (rowsDeleted > 0) {
+                Log.d("DBHelper", "Diet entry deleted successfully: " + dishName);
+            } else {
+                Log.d("DBHelper", "No diet entry found with name: " + dishName);
+            }
+        } catch (Exception e) {
+            Log.e("DBHelper", "Error while trying to delete diet entry", e);
+        } finally {
+            db.close();
+        }
+    }
+
+
 
 }
