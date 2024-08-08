@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -17,12 +19,21 @@ public class CardioActivity extends AppCompatActivity {
 
     private SearchView searchView;
 
+    ImageView arrowbtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cardio);
-        searchView = findViewById(R.id.cardioSearch);
+        searchView = findViewById(R.id.ex_SV);
         searchView.clearFocus();
+        arrowbtn=findViewById(R.id.arrowbtn);
+
+        arrowbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -35,7 +46,7 @@ public class CardioActivity extends AppCompatActivity {
             }
         });
 
-        recyclerView = findViewById(R.id.cardioRV);
+        recyclerView = findViewById(R.id.ex_RV);
 
         cardioModels = new ArrayList<>(); // Initialize cardioModels here
 

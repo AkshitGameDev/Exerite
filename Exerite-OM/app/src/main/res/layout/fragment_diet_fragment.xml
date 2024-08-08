@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".diet_fragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -19,7 +20,7 @@
         android:layout_marginTop="28dp"
         android:layout_marginEnd="52dp"
         android:layout_marginBottom="650dp"
-        android:fontFamily="sans-serif-black"
+        android:fontFamily="sans-serif"
         android:text="@string/pick_a_diet"
         android:textSize="40sp" />
 
@@ -31,9 +32,9 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="39dp"
-        android:contentDescription="nonveg"
         android:layout_marginTop="14dp"
         android:layout_marginBottom="472dp"
+        android:contentDescription="nonveg"
 
         android:src="@drawable/nonveg" />
 
@@ -45,10 +46,10 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-android:contentDescription="@string/drinks"
         android:layout_marginStart="37dp"
         android:layout_marginTop="451dp"
         android:layout_marginBottom="77dp"
+        android:contentDescription="@string/drinks"
 
         android:src="@drawable/drinks" />
 
@@ -61,8 +62,8 @@ android:contentDescription="@string/drinks"
         android:layout_centerInParent="true"
         android:layout_marginStart="43dp"
         android:layout_marginTop="14dp"
-        android:contentDescription="veg"
         android:layout_marginBottom="283dp"
+        android:contentDescription="veg"
 
         android:src="@drawable/veg" />
 

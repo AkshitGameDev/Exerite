@@ -1,61 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    android:padding="20dp"
     tools:context=".ExerciseFragment">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
         android:layout_marginTop="40dp"
         android:fontFamily="sans-serif"
         android:text="@string/workouts"
         android:textSize="40sp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_exercises"
-        android:layout_width="wrap_content"
-        android:layout_height="300dp"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginEnd="8dp" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/recycler_view_exercises"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="13dp"
-        android:fontFamily="sans-serif"
-        android:text="@string/exersise"
-        android:textSize="40sp" />
-
     <ImageView
         android:id="@+id/cardio"
-        android:layout_width="304dp"
-        android:layout_height="125dp"
-        android:layout_below="@+id/textView3"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="14dp"
-        android:src="@drawable/cardio"
-        android:onClick="image_cardio"/>
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:layout_marginTop="50dp"
+        android:onClick="image_cardio"
+        android:src="@drawable/cardio" />
 
     <ImageView
         android:id="@+id/strenght"
-        android:layout_width="303dp"
-        android:layout_height="112dp"
-        android:layout_below="@+id/cardio"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
         android:onClick="image_strength"
         app:srcCompat="@drawable/strenght" />
-</RelativeLayout>
+
+</LinearLayout>

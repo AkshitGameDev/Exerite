@@ -1,7 +1,5 @@
 package com.example.exerite_11;
 
-import static android.content.ContentValues.TAG;
-
 import android.Manifest;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -12,22 +10,6 @@ import android.graphics.ImageDecoder;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.camera.core.CameraSelector;
-import androidx.camera.core.ImageCapture;
-import androidx.camera.core.ImageCaptureException;
-import androidx.camera.core.Preview;
-import androidx.camera.lifecycle.ProcessCameraProvider;
-import androidx.camera.view.PreviewView;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LifecycleOwner;
-
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,39 +20,52 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.camera.core.CameraSelector;
+import androidx.camera.core.ImageCapture;
+import androidx.camera.core.ImageCaptureException;
+import androidx.camera.core.Preview;
+import androidx.camera.lifecycle.ProcessCameraProvider;
+import androidx.camera.view.PreviewView;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleOwner;
+
 import com.google.common.util.concurrent.ListenableFuture;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.Map;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class SettingsActiity extends Fragment {
 
+    private static final String TAG = "SettingsActivity";
     private static final int CAMERA_PERMISSION_CODE = 102;
 
-
     private Button signOut;
-    private static TextView name;
+    private static TextView name, emailAddr;
     private ImageView imgUser;
     private PreviewView cameraPreviewView;
     private ImageCapture imageCapture;
+    private ExecutorService cameraExecutor;
 
     public SettingsActiity() {
         // Required empty public constructor
     }
 
-    public static SettingsActiity newInstance(String param1, String param2) {
-        SettingsActiity fragment = new SettingsActiity();
-
-        return fragment;
+    public static SettingsActiity newInstance() {
+        return new SettingsActiity();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        cameraExecutor = Executors.newSingleThreadExecutor(); // Initialize camera executor
     }
 
     @Override
@@ -79,39 +74,44 @@ public class SettingsActiity extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_settings_actiity, container, false);
 
+        emailAddr = rootView.findViewById(R.id.textView4);
+        emailAddr.setText(Login_activity.getUserEmail(getContext()));
+
         name = rootView.findViewById(R.id.greetingTextView);
         name.setText(trimIfNeeded());
+
         imgUser = rootView.findViewById(R.id.profile_imgview);
         cameraPreviewView = rootView.findViewById(R.id.cameraPreviewView);
 
-        imgUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Check and request camera permissions
-                if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(getActivity(),
-                            new String[]{Manifest.permission.CAMERA},
-                            CAMERA_PERMISSION_CODE);
-                } else {
-                    startCamera();
-                }
+        imgUser.setOnClickListener(v -> {
+            if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA)
+                    != PackageManager.PERMISSION_GRANTED) {
+                requestCameraPermission.launch(Manifest.permission.CAMERA);
+            } else {
+                startCamera();
             }
         });
 
         // Set up sign out button
         signOut = rootView.findViewById(R.id.logOutButton);
-        signOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Assuming MainActivity is your "sign out" destination and clears the user session
-                Intent intent = new Intent(getContext(), MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Clears the activity stack
-                startActivity(intent);
-            }
-        });
-
+        signOut.setOnClickListener(v -> signOutUser());
 
         return rootView;
+    }
+
+    private final ActivityResultLauncher<String> requestCameraPermission =
+            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+                if (isGranted) {
+                    startCamera();
+                } else {
+                    Toast.makeText(requireContext(), "Camera permission is required", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+    private void signOutUser() {
+        Intent intent = new Intent(getContext(), MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
     private String trimIfNeeded() {
@@ -119,7 +119,9 @@ public class SettingsActiity extends Fragment {
         if (temp.length() >= 7) {
             temp = "Hey, " + temp.substring(0, 4) + "..." + "!";
             return temp;
-        } else return "Hey, " + temp + "!";
+        } else {
+            return "Hey, " + temp + "!";
+        }
     }
 
     private void startCamera() {
@@ -133,7 +135,6 @@ public class SettingsActiity extends Fragment {
                 bindCameraPreview(cameraProvider);
 
             } catch (ExecutionException | InterruptedException e) {
-                // Handle exceptions
                 Log.e(TAG, "Error starting camera: ", e);
             }
         }, ContextCompat.getMainExecutor(requireContext()));
@@ -171,17 +172,16 @@ public class SettingsActiity extends Fragment {
     }
 
     private void takePhoto() {
-        // Create output file options
         File imageFile = createImageFile();
+
         ImageCapture.OutputFileOptions outputOptions = new ImageCapture.OutputFileOptions.Builder(imageFile).build();
 
-        imageCapture.takePicture(outputOptions, ContextCompat.getMainExecutor(requireContext()), new ImageCapture.OnImageSavedCallback() {
+        imageCapture.takePicture(outputOptions, cameraExecutor, new ImageCapture.OnImageSavedCallback() {
             @Override
             public void onImageSaved(@NonNull ImageCapture.OutputFileResults outputFileResults) {
                 Uri savedUri = Uri.fromFile(imageFile);
                 if (savedUri != null) {
-                    setImageToView(savedUri);
-                    Toast.makeText(requireContext(), "Image captured successfully", Toast.LENGTH_SHORT).show();
+                    getActivity().runOnUiThread(() -> setImageToView(savedUri));
                 }
             }
 
@@ -193,7 +193,6 @@ public class SettingsActiity extends Fragment {
     }
 
     private File createImageFile() {
-        // Create an image file to save the captured image
         File storageDir = new File(requireContext().getExternalFilesDir(null), "CameraX");
         if (!storageDir.exists()) {
             storageDir.mkdirs();
@@ -207,17 +206,19 @@ public class SettingsActiity extends Fragment {
         try {
             Bitmap bitmap;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                ImageDecoder.Source source = ImageDecoder.createSource(getActivity().getContentResolver(), uri);
+                ImageDecoder.Source source = ImageDecoder.createSource(requireContext().getContentResolver(), uri);
                 bitmap = ImageDecoder.decodeBitmap(source);
             } else {
-                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
+                bitmap = MediaStore.Images.Media.getBitmap(requireContext().getContentResolver(), uri);
             }
             imgUser.setImageBitmap(bitmap);
+
             // Assuming you have the current user's email stored somewhere
-            String currentUserEmail = Login_activity.getUserEmail(getContext());// Implement this method to get the current user's email
+            String currentUserEmail = Login_activity.getUserEmail(getContext());
 
             // Update the profile image in the SQLite database
             updateProfileImage(currentUserEmail, bitmap);
+
             // Hide the camera preview after capturing
             cameraPreviewView.setVisibility(View.GONE);
 
@@ -228,26 +229,32 @@ public class SettingsActiity extends Fragment {
 
     private void updateProfileImage(String email, Bitmap profileImage) {
         // Open the database for writing
-        SQLiteDatabase db = new DBHelper(getContext()).getWritableDatabase();
+        SQLiteDatabase db = null;
+        try {
+            db = new DBHelper(getContext()).getWritableDatabase();
 
-        // Convert the Bitmap to a byte array
-        byte[] imageBytes = getBitmapAsByteArray(profileImage);
+            // Convert the Bitmap to a byte array
+            byte[] imageBytes = getBitmapAsByteArray(profileImage);
 
-        // Create a ContentValues object to hold the new profile image
-        ContentValues values = new ContentValues();
-        values.put("profile_image", imageBytes);
+            // Create a ContentValues object to hold the new profile image
+            ContentValues values = new ContentValues();
+            values.put("profile_image", imageBytes);
 
-        // Update the user's profile image using their email as the identifier
-        int rowsUpdated = db.update("users", values, "email = ?", new String[]{email});
+            // Update the user's profile image using their email as the identifier
+            int rowsUpdated = db.update("users", values, "email = ?", new String[]{email});
 
-        if (rowsUpdated > 0) {
-            Toast.makeText(getContext(), "Profile image updated successfully", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(getContext(), "Failed to update profile image", Toast.LENGTH_SHORT).show();
+            if (rowsUpdated > 0) {
+                Toast.makeText(getContext(), "Profile image updated successfully", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getContext(), "Failed to update profile image", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Database update failed", e);
+        } finally {
+            if (db != null) {
+                db.close();  // Ensure the database is closed to free resources
+            }
         }
-
-        // Close the database connection
-        db.close();
     }
 
     private byte[] getBitmapAsByteArray(Bitmap bitmap) {
@@ -256,17 +263,9 @@ public class SettingsActiity extends Fragment {
         return outputStream.toByteArray();
     }
 
-
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        if (requestCode == CAMERA_PERMISSION_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                startCamera();
-            } else {
-                Toast.makeText(requireContext(), "Camera permission is required", Toast.LENGTH_SHORT).show();
-            }
-        }
+    public void onDestroy() {
+        super.onDestroy();
+        cameraExecutor.shutdown(); // Shutdown the executor when the fragment is destroyed
     }
 }

@@ -66,7 +66,7 @@ public class Home_Activity extends AppCompatActivity {
     public void image_journal(View view) {
         replaceFragment(new JournalFragment());
     }
-/*
+
     public void image_strength(View view) {
         startNewActivity(SterngthActivity.class);
     }
@@ -74,7 +74,7 @@ public class Home_Activity extends AppCompatActivity {
     public void image_cardio(View view) {
         startNewActivity(CardioActivity.class);
     }
-
+/*
     public void image_nonVeg(View view) {
         startNewActivity(NonVegActivity.class);
     }
@@ -87,11 +87,12 @@ public class Home_Activity extends AppCompatActivity {
         startNewActivity(DrinksActivity.class);
     }
 
+*/
     // Helper method to start a new activity
     private void startNewActivity(Class<? extends Activity> activityClass) {
         Intent intent = new Intent(this, activityClass);
         startActivity(intent);
     }
 
- */
+
 }

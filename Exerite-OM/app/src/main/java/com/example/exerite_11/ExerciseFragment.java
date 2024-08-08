@@ -60,12 +60,8 @@ public class ExerciseFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        fragModel = new ArrayList<>();
-        String[] exerciseNames = getResources().getStringArray(R.array.strength_exercise_names);
-        String[] exerciseReps = getResources().getStringArray(R.array.strength_exercise_reps);
-        for (int i = 0; i < exerciseNames.length; i++) {
-            fragModel.add(new ExersiseModel(exerciseNames[i], exerciseReps[i]));
-        }
+
+
     }
 
     @Override
@@ -74,12 +70,6 @@ public class ExerciseFragment extends Fragment {
         // Inflate the layout for this fragment
 
         View rootView = inflater.inflate(R.layout.fragment_exercise, container, false);
-
-        recyclerView = rootView.findViewById(R.id.recycler_view_exercises);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        adapter = new ExersiseRvAdapter(getContext(), fragModel);
-        recyclerView.setAdapter(adapter);
 
 
         return rootView;

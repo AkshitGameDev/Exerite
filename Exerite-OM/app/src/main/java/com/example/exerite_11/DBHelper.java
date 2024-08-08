@@ -15,9 +15,9 @@ import java.util.Date;
 
 public class DBHelper extends SQLiteOpenHelper {
     // Database version
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 5;
     // Database name
-    private static final String DATABASE_NAME = "Exerite4V.db";
+    private static final String DATABASE_NAME = "Exerite5V.db";
 
     // Table and columns
     private static final String TABLE_JOURNALS = "Journals";
@@ -32,6 +32,13 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String COLUMN_CATEGORY = "category";
     private static final String COLUMN_NAME = "diet_name";
     private static final String COLUMN_CALORIE = "diet_calorie";
+    private static final String TABLE_EXERCISES = "exercises";
+    private static final String COLUMN_WORKOUT_ID = "workoutid";
+    private static final String WCOLUMN_EMAIL = "email";
+    private static final String COLUMN_WORKOUT_NAME = "workout_name";
+    private static final String COLUMN_WORKOUT_DESCRIPTION = "workout_description";
+    private static final String WCOLUMN_CATEGORY = "category"; // New col
+
 
     public DBHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -48,14 +55,13 @@ public class DBHelper extends SQLiteOpenHelper {
                 "profile_image BLOB)";
         db.execSQL(CREATE_USERS_TABLE);
 
-
-        String CREATE_WORKOUTS_TABLE = "CREATE TABLE workouts (" +
-                "workoutid INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "userid INTEGER," +
-                "WorkoutName TEXT, " +
-                "date TEXT," +
-                "description TEXT)";
-        db.execSQL(CREATE_WORKOUTS_TABLE);
+        String CREATE_EXERCISES_TABLE = "CREATE TABLE " + TABLE_EXERCISES + " (" +
+                COLUMN_WORKOUT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_EMAIL + " TEXT, " +
+                COLUMN_WORKOUT_NAME + " TEXT, " +
+                COLUMN_WORKOUT_DESCRIPTION + " TEXT, " +
+                COLUMN_CATEGORY + " TEXT)"; // New column added
+        db.execSQL(CREATE_EXERCISES_TABLE);
 
         String CREATE_TABLE_JOURNALS =
                 "CREATE TABLE " + TABLE_JOURNALS + " (" +
@@ -80,7 +86,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older table if exists and create fresh table
         db.execSQL("DROP TABLE IF EXISTS users");
-        db.execSQL("DROP TABLE IF EXISTS workouts");
+        db.execSQL("DROP TABLE IF EXISTS exercises");
         db.execSQL("DROP TABLE IF EXISTS Journals");
         db.execSQL("DROP TABLE IF EXISTS DietTable");
 
@@ -108,38 +114,38 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public boolean checkPassword(String email, String password) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM users WHERE email = ? AND password = ?", new String[]{email, password});
-        boolean exists = cursor.getCount() > 0;
-        cursor.close(); // Closing cursor
-        db.close(); // Closing database connection
+        SQLiteDatabase db = null;
+        Cursor cursor = null;
+        boolean exists = false;
+
+        try {
+            db = this.getReadableDatabase();
+
+            // Select only the required field, usually the primary key or any column
+            String query = "SELECT 1 FROM users WHERE email = ? AND password = ?";
+
+            // Using try-with-resources to ensure the cursor is closed automatically
+            cursor = db.rawQuery(query, new String[]{email, password});
+
+            // Check if the cursor has any records
+            exists = cursor.moveToFirst(); // Returns true if there is at least one record
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null) {
+                cursor.close(); // Ensure the cursor is closed to avoid memory leaks
+            }
+            if (db != null) {
+                db.close(); // Ensure the database is closed to free resources
+            }
+        }
+
         return exists;
     }
 
-    public boolean hasRecentWorkouts(int userId) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM workouts WHERE userid = ? ORDER BY date DESC LIMIT 1", new String[]{String.valueOf(userId)});
-        boolean hasRecentWorkouts = cursor.getCount() > 0;
-        cursor.close(); // Closing cursor
-        db.close(); // Closing database connection
-        return hasRecentWorkouts;
-    }
 
-    public boolean insertWorkout(int userId, String workoutName, String workoutDescription) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String currentDateTime = dateFormat.format(new Date());
 
-        ContentValues values = new ContentValues();
-        values.put("userid", userId);
-        values.put("WorkoutName", workoutName);
-        values.put("date", currentDateTime);
-        values.put("description", workoutDescription);
 
-        long result = db.insert("workouts", null, values);
-        db.close(); // Closing database connection
-        return result != -1;
-    }
 
     public boolean addDiet(String email, String category, String name, String calorie) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -178,6 +184,56 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return dietList;
     }
+
+
+    public boolean addExercise(String email, String workoutName, String workoutDescription, String category) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(WCOLUMN_EMAIL, email);
+        values.put(COLUMN_WORKOUT_NAME, workoutName);
+        values.put(COLUMN_WORKOUT_DESCRIPTION, workoutDescription);
+        values.put(WCOLUMN_CATEGORY, category); // Include category
+
+        long result = db.insert(TABLE_EXERCISES, null, values);
+        db.close();
+
+        return result != -1;
+    }
+
+    public ArrayList<ExersiseModel> getExercises(String email, String category) {
+        ArrayList<ExersiseModel> exerciseList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // SQL query to filter by both email and category
+        String selection = WCOLUMN_EMAIL + "=? AND " + WCOLUMN_CATEGORY + "=?";
+        String[] selectionArgs = new String[]{email, category};
+
+        Cursor cursor = db.query(
+                TABLE_EXERCISES,
+                new String[]{COLUMN_WORKOUT_ID, WCOLUMN_EMAIL, COLUMN_WORKOUT_NAME, COLUMN_WORKOUT_DESCRIPTION, WCOLUMN_CATEGORY},
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
+        );
+
+        if (cursor.moveToFirst()) {
+            do {
+                String name = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_WORKOUT_NAME));
+                String description = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_WORKOUT_DESCRIPTION));
+                String cat = cursor.getString(cursor.getColumnIndexOrThrow(WCOLUMN_CATEGORY)); // Retrieve category
+
+                // Create ExersiseModel with category
+                exerciseList.add(new ExersiseModel(email,name, description, cat));
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return exerciseList;
+    }
+
 
 
     public void insertJournal(String title, String description, String email) {

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".HomeFragment">
 
     <ImageView
@@ -83,10 +84,10 @@
         android:id="@+id/img_notifcation_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/NameDisplayField"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
-        android:layout_alignEnd="@id/NameDisplayField"
 
         android:src="@drawable/ic_notif48" />
 
